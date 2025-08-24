@@ -23,6 +23,6 @@ A Java Spring Boot + React project for managing university systems.
    - Run `mvn spring-boot:run`
 
 3. Frontend setup (React)
-   - `cd frontend`
+   - `cd UMS-EPR`
    - `npm install`
    - `npm start`
