@@ -1,0 +1,163 @@
+/* ===== Header Container ===== */
+.header {
+    color: #fff;
+    width: 100%;
+    min-height: 100px;
+    max-height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    /* border-radius: 16px; */
+    /* margin-bottom: 80px; */
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+    box-shadow: 0 8px 24px rgba(192, 57, 133, 0.25);
+    transition: all 0.3s ease-in-out;
+    padding:8px  1rem 1rem 1rem;
+}
+
+/* ===== Heading Area ===== */
+.HeadingCont {
+    display: flex;
+    width: 100%;
+    padding: 1px 20px;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 12px;
+    
+}
+
+/* Profile Avatar */
+.profile {
+    height: 42px;
+    width: 42px;
+    border: 2px solid rgb(230, 97, 173);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    font-size: 0.9rem;
+    font-weight: bold;
+
+    box-shadow: 0 4px 10px rgba(192, 57, 133, 0.3);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.profile:hover {
+    transform: scale(1.1);
+}
+
+/* Logo / Brand Name */
+.logo {
+    margin-bottom: 7px;
+     background: linear-gradient(160deg, #38bdf8, #6366f1, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+    font-size: clamp(1rem, 2vw + 1rem, 2rem);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* ===== Nav Bar ===== */
+.nav {
+    background: linear-gradient(90deg, rgb(192, 57, 133), rgb(230, 97, 173));
+    width: 70%;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    padding: 0 10px;
+    box-shadow: 0 6px 16px rgba(192, 57, 133, 0.25);
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+.ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Nav Links & Buttons */
+.nav a,
+.nav button {
+    text-decoration: none;
+    color: inherit;
+    background: transparent;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* ===== Nav Items ===== */
+.li {
+    min-width: 90px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-weight: 500;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    color: #fff;
+}
+.li:hover {
+    background-color: #1e1e2f;
+    border: 2px solid rgb(230, 97, 173);
+    color: rgb(230, 97, 173);
+    border-radius: 20px;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(230, 97, 173, 0.3);
+}
+
+/* Icon & Text control */
+.liText {
+    display: inline;
+}
+.liIcon {
+    display: none;
+    font-size: 1.2rem;
+}
+
+/* ===== Responsive Design ===== */
+@media screen and (max-width: 950px) {
+    .nav {
+        width: 96%;
+        min-height: auto;
+        border-radius: 10px;
+        flex-wrap: wrap;
+        padding: 0.5rem 0.8rem;
+    }
+
+    .li {
+        min-width: 50px;
+        height: 50px;
+        padding: 0 8px;
+        font-size: 0.9rem;
+    }
+
+    .liText {
+        display: none; /* hide text */
+    }
+    .liIcon {
+        display: inline; /* show icons only */
+    }
+
+    .hamburger {
+        display: flex;
+    }
+}

@@ -1,0 +1,94 @@
+.footer {
+  width: 100%;
+ /* deep subtle background */
+ background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #ccc;
+  font-size: 0.9rem;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px 12px 0 0;
+}
+
+.footerContainer {
+  width: 95%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Left Section */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex: 1;
+  min-width: 200px;
+}
+
+.logo {
+  width: 42px;
+  height: 42px;
+}
+
+.brandName {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #f0f0f0;
+}
+
+.tagline {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* Center Section */
+.center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 200px;
+}
+
+.link {
+  color: #aaa;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Right Section */
+.right {
+  flex: 1;
+  text-align: right;
+  min-width: 200px;
+}
+
+.versionText {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footerContainer {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .right {
+    text-align: center;
+  }
+}

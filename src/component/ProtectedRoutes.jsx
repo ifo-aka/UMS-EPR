@@ -1,0 +1,25 @@
+import React from 'react';
+import { Navigate} from 'react-router-dom';
+import { useSelector , useDispatch } from 'react-redux';
+
+
+
+
+const ProtectedRoutes = ({ children }) => {
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const authChecked = useSelector((state) => state.auth.authChecked);
+    console.log(isAuthenticated)
+
+  
+  if (!authChecked) {
+    // Still checking token -> show loading or nothing
+    return <div className="spinner-border" style={{ width: "4rem", height: "4rem" ,position:"absolute",top:"50%",left: "55%"}} role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
+  }
+    // If authenticated, render children; otherwise redirect to login
+  
+    return isAuthenticated ? children : <Navigate to="/login" replace />;
+};
+
+export default ProtectedRoutes;

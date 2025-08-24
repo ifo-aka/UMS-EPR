@@ -1,0 +1,162 @@
+.main{
+    display: flex;
+    align-items: center;
+ 
+    width: 80%;
+    /* background-color: #1E1E2F; */
+    height: auto;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.searchItemsContainer{
+    margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .3rem;
+  width: 30%;
+  min-width: 300px;
+
+}
+.searchInput{
+   
+  border-radius: 6px;
+  border: 1px solid #e661ad;
+  background: #23234a;
+  color: #fff;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+}
+.search{
+  padding: 0.5rem 1rem;
+  width:70%;
+  min-width: 100px;
+  border-radius: 6px;
+   background: #23234a;
+   border: none;
+   outline: none;
+}
+.search:active{
+  outline: none;
+  border: none;
+}
+.filterBtn{
+    
+    background:  #262652;
+    width: 30%;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 2rem;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+.studentsTable {
+    width: 80%;
+    border-collapse:collapse ;
+    margin-bottom: 2rem;
+    background: #1E1E2F;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0px  10px 10px rgba(200, 171, 188, 0.15);
+}
+
+.studentsTable th,
+.studentsTable td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    color: #fff;
+}
+
+.studentsTable th {
+    background: rgb(192, 57, 133);
+    color: #fff;
+    font-weight: bold;
+    border-bottom: 2px solid #fff;
+}
+
+.studentsTable tr {
+    transition: background 0.2s;
+}
+
+.studentsTable tr:nth-child(even) {
+    background: #23234a;
+}
+
+.studentsTable tr:hover {
+    background: rgb(245, 123, 164);
+    color: #1E1E2F;
+}
+
+.studentsTable td {
+    border-bottom: 1px solid #444;
+}
+
+@media screen and (max-width: 768px) {
+    .studentsTable th,
+    .studentsTable td {
+        padding: 0.5rem;
+        font-size: 0.95rem;
+    }
+    .studentsTable {
+        font-size: 0.95rem;
+    }
+}
+
+
+
+.paginationInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #fff;
+    background: rgb(167, 137, 154);
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+}
+
+.paginationControls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.paginationControls button {
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 4px;
+    background: #1E1E2F;
+    color: rgb(192, 57, 133);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s, color 0.2s;
+    font-weight: bold;
+    border: 2px solid rgb(192, 57, 133);
+}
+.paginationControls button:hover:not(:disabled) {
+    background: rgb(192, 57, 133);
+    color: #fff;
+}
+
+.paginationControls button:disabled {
+    background: #ccc;
+    color: #fff;
+    cursor: not-allowed;
+    border: 2px solid #ccc;
+}
+
+
+@media screen and (max-width: 768px) {
+   main{
+    width: 100%;
+   }
+}

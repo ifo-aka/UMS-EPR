@@ -1,0 +1,331 @@
+/* ========== CONTAINER & DASHBOARD ========== */
+.container {
+  min-height: 100vh;
+  padding: 2rem 0;
+  width: 100%;
+  background: linear-gradient(135deg, #1e1e2f 0%, #141420 100%);
+  color: #fff;
+}
+
+.dashboard {
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(30, 30, 47, 0.85);
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(192, 57, 133, 0.15);
+  backdrop-filter: blur(12px);
+  animation: fadeIn 0.6s ease;
+}
+
+/* ========== HERO SECTION ========== */
+.herocont {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.usericon {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Heading */
+.headingTop {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #ff6ec7, #e661ad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+/* ========== SEARCH & BUTTONS ========== */
+.searchicon {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.searchInput {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid #e661ad;
+  background: #23234a;
+  color: #fff;
+  max-width: 350px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.search {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+}
+
+.search::placeholder {
+  color: #aaa;
+}
+
+.btns {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+/* Shared button style */
+.recentBtn,
+.allBtn,
+.filterSelect,
+.filterBtn,
+.addStudentbtn {
+  border-radius: 10px;
+  padding: 0.5rem 1.6rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(192, 57, 133, 0.15);
+}
+
+.recentBtn,
+.allBtn,
+.addStudentbtn {
+  background: linear-gradient(90deg, #e661ad, #ff6ec7);
+  color: #fff;
+}
+
+.recentBtn:hover,
+.allBtn:hover,
+.addStudentbtn:hover {
+  background: #15171c;
+  border: 2px solid #ec6df1;
+  color: #ec6df1;
+  box-shadow: 0 6px 18px rgba(229, 68, 213, 0.35);
+}
+
+.filterSelect,
+.filterBtn {
+  background: #262652;
+  color: #fff;
+}
+
+.filterBtn:hover,
+.filterSelect:hover {
+  background: #313161;
+  border: 1px solid #e661ad;
+}
+
+/* ========== STATS CARDS ========== */
+.totalStudent,
+.totalPages,
+.totalDepartments {
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  flex: 1;
+  min-width: 180px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.totalStudent {
+  background: linear-gradient(135deg, #db38b5, #e661ad);
+  color: #fff;
+}
+
+.totalPages {
+  background: linear-gradient(135deg, #573152, #2c1e3d);
+  color: #fff;
+}
+
+.totalDepartments {
+  background: #1e1e2f;
+  color: #db38b5;
+}
+
+.totalStudent:hover,
+.totalPages:hover,
+.totalDepartments:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(192, 57, 133, 0.25);
+}
+
+.totalStudentValue,
+.totalPagesValue {
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.totalStudentLabel,
+.totalPagesLabel,
+.totalDepartmentsLabel {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+.totalDepartmentsLabel {
+    background: rgba(236, 109, 241, 0.1);
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-weight: 600;
+  color: #ec6df1;
+}
+/* ========== TABLE ========== */
+.tableContainer {
+  width: 100%;
+  height: 45vh;
+  overflow: auto;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(30, 30, 47, 0.4);
+  backdrop-filter: blur(8px);
+  box-shadow: inset 0 0 8px rgba(192, 57, 133, 0.1);
+}
+
+.tableContainer::-webkit-scrollbar {
+  width: 8px;
+}
+.tableContainer::-webkit-scrollbar-thumb {
+  background: linear-gradient(#e661ad, #db38b5);
+  border-radius: 10px;
+}
+.tableContainer::-webkit-scrollbar-track {
+  background: #23234a;
+  border-radius: 10px;
+}
+
+.studentsTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1e1e2f;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0px 12px rgba(200, 171, 188, 0.2);
+}
+
+.studentsTable th {
+  background: linear-gradient(90deg, #db38b5, #e661ad);
+  color: #fff;
+  font-weight: bold;
+  padding: 1rem;
+  text-align: left;
+  letter-spacing: 0.5px;
+}
+
+.studentsTable td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid #333;
+}
+
+.studentsTable tr:nth-child(even) {
+  background: #23234a;
+}
+
+.studentsTable tr:hover {
+  background: #f57ba4;
+  color: #1e1e2f;
+  transition: all 0.2s ease;
+}
+
+.noDataCell {
+  color: #aaa;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* ========== PAGINATION ========== */
+.paginationControls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.paginationControls button {
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  background: #1e1e2f;
+  color: rgb(192, 57, 133);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 2px solid rgb(192, 57, 133);
+  transition: all 0.25s ease;
+}
+
+.paginationControls button:hover:not(:disabled) {
+  background: linear-gradient(90deg, #e661ad, #db38b5);
+  color: #fff;
+}
+
+.paginationControls button:disabled {
+  background: #444;
+  color: #999;
+  border: 2px solid #444;
+  cursor: not-allowed;
+}
+
+/* ========== UTILS ========== */
+.roleIndicator {
+  color: #fff;
+  font-size: 1rem;
+}
+
+.tableActions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.actionBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #e661ad;
+  font-size: 1.1rem;
+  transition: transform 0.2s;
+}
+
+.actionBtn:hover {
+  transform: scale(1.2);
+  color: #ff6ec7;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .herocont {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .btns {
+    margin: 0;
+    justify-content: center;
+  }
+  .tableContainer {
+    height: 40vh;
+    margin-bottom: 10px;
+  }
+}
