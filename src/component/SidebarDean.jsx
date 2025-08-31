@@ -39,7 +39,7 @@ const SidebarDean = () => {
 
   return (
     <>
-      {isDesktopDimention ? (
+      
         <div className={styles.sidebarContainer}>
           <div className={styles.sidebar}>
             <h2 className={styles.title}>Quick links</h2>
@@ -61,13 +61,9 @@ const SidebarDean = () => {
             </div>
           </div>
         </div>
-      ) : (
-        <div className={styles.hamburger}>
-          <span className={styles.bar}></span>
-          <span className={styles.bar}></span>
-          <span className={styles.bar}></span>
-        </div>
-      )}
+      
+      
+      
     </>
   );
 };

@@ -2,9 +2,11 @@
 .container {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
   padding: 2rem 1rem;
-  background: linear-gradient(135deg, #1c1c2b, #2b2b3c);
+  background: linear-gradient(135deg, #0f172a, #1e293b);
   min-height: 100vh;
   font-family: "Inter", sans-serif;
 }
@@ -126,6 +128,59 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
   animation: fadeInDown 0.8s ease-out;
 }
+/* ===== File Upload Box ===== */
+.uploadBox {
+  min-width: 300px;
+  border: 2px dashed #e04bb1;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  color: #fff;
+  background: rgba(43, 43, 60, 0.7);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.uploadBox:hover {
+  border-color: #ec6df1;
+  background: rgba(43, 43, 60, 0.9);
+}
+
+.dragActive {
+  border-color: #00d084;
+  background: rgba(0, 208, 132, 0.15);
+}
+
+.uploadLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: #ec6df1;
+  cursor: pointer;
+}
+
+.hiddenInput {
+
+  position: absolute;
+  inset: 0;           /* cover the whole parent */
+  opacity: 0;         /* fully invisible */
+  cursor: pointer;    /* shows pointer when hovering */
+
+  
+}
+
+.uploadText {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-top: 0.5rem;
+}
+
+.successFile {
+  color: #00d084;
+  font-weight: 600;
+}
+
 
 @keyframes fadeInDown {
   from {

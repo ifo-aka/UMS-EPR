@@ -1,9 +1,26 @@
 // src/store/slices/authSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
  // adjust path if needed
-import { fetchStudents as dbFetchStudents ,  login as dbLogin} from "../DbQuery";
+import { fetchStudents as dbFetchStudents ,  login as dbLogin,signupStudent as dbSignUpStudent} from "../DbQuery";
 import { fetchStudentsThunk } from "./studentSlice";
+export const signupThunk = createAsyncThunk(
+  "auth/signup",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const response = await dbSignUpStudent(userData);
+      console.log(response)
 
+      // ✅ Explicitly check backend success flag
+      if (!response.success) {
+        return rejectWithValue(response);
+      }
+
+      return response;
+    } catch (error) {
+      return rejectWithValue({ success: false, error: error.message });// return consistent error object
+    }
+  }
+);
 export const loginThunk = createAsyncThunk(
   "auth/login",
   async ({ email, password }, { dispatch, rejectWithValue }) => {
@@ -53,7 +70,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     token: null,
-    role: "Guest",
+    role: "GUEST",
     isAuthenticated: false,
  
     authChecked: false,
@@ -65,7 +82,7 @@ const authSlice = createSlice({
       localStorage.removeItem("token");
       localStorage.removeItem("role");
       state.token = null;
-      state.role = "Guest";
+      state.role = "GUEST";
       state.isAuthenticated = false;
       state.isAdmin = false;
     },
@@ -80,12 +97,24 @@ const authSlice = createSlice({
       state.isAdmin = ((action.payload || "").toUpperCase() === "ADMIN");
     },
     setToken(state, action) {
-      state.token = action.payload;
+      state.token = action.payload.toUpperCase();
       state.isAuthenticated = !!action.payload;
     },
   },
   extraReducers(builder) {
     builder
+    .addCase(signupThunk.fulfilled ,(state,action)=>{
+      console.log("payload" + action.payload)
+      const {role,token} = action.payload.data;
+      localStorage.setItem("token",token);
+      localStorage.setItem("role",role.toUpperCase() || "GUEST");
+      state.showSpinner=false;
+      state.authChecked = true;
+      state.isAuthenticated=true;
+      state.role=  role.toUpperCase();
+
+
+    })
       .addCase(loginThunk.pending, (state) => {
         state.showSpinner = true;
         state.authChecked = false;
@@ -114,7 +143,12 @@ const authSlice = createSlice({
       .addCase(restoreAuthFromLocalStorage.fulfilled, (state, action) => {
         const { token, role } = action.payload;
         state.token = token;
-        state.role = role || "Guest";
+        if(role){
+               state.role = role.toUpperCase()
+        }else{
+            state.role = "GUEST";
+        }
+         
         state.isAuthenticated = !!token;
         state.isAdmin = ((role || "").toUpperCase() === "ADMIN");
         state.authChecked = true;

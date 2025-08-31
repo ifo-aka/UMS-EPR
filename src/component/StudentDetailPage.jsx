@@ -1,40 +1,80 @@
 import { useNavigate, useLocation, Form } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import styles from "../StyleSheets/SignUp.module.css"; // reuse your signup styling
+import { signupThunk } from "../store/slices/authSlice";
+import {useSelector, useDispatch } from "react-redux";
+
+
 
 const StudentDetailPage = () => {
+  const [error,setError] = useState("");
+    const role = useSelector((s) => s.auth.role);
+      const isAuthenticated = useSelector((s) => s.auth.isAuthenticated);
   const navigate = useNavigate();
   const location = useLocation();
   const formRef = useRef(null);
+  const dispatch = useDispatch();
 
+  const details = location.state?.studentDetails || {};
+  console.log("Received details:", details);
+  
   const handleSubmit = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const formData = {
-      fullName: formRef.current.elements.fullName.value,
-      fatherName: formRef.current.elements.fatherName.value,
-      dob: formRef.current.elements.dob.value,
-      cnic: formRef.current.elements.cnic.value,
-      gender: formRef.current.elements.gender.value,
-      domicile: formRef.current.elements.domicile.files[0],
-      phone: formRef.current.elements.phone.value,
-      
-      matricRoll: formRef.current.elements.matricRoll.value,
-      matricBoard: formRef.current.elements.matricBoard.value,
-      matricYear: formRef.current.elements.matricYear.value,
-      matricMarks: formRef.current.elements.matricMarks.value,
-      interRoll: formRef.current.elements.interRoll.value,
-      interBoard: formRef.current.elements.interBoard.value,
-      interYear: formRef.current.elements.interYear.value,
-      interMarks: formRef.current.elements.interMarks.value,
-      program: formRef.current.elements.program.value,
-      hostel: formRef.current.elements.hostel.checked,
-      transport: formRef.current.elements.transport.checked,
-      scholarship: formRef.current.elements.scholarship.checked,
-    };
+  const studentDetail = {
+    fullName: formRef.current.elements.fullName.value,
+    fatherName: formRef.current.elements.fatherName.value,
+    dob: formRef.current.elements.dob.value,
+    cnic: parseInt(formRef.current.elements.cnic.value, 10),
+    gender: formRef.current.elements.gender.value.toUpperCase(),
+    phone: formRef.current.elements.phone.value,
+    matricRoll: formRef.current.elements.matricRoll.value,
+    matricBoard: formRef.current.elements.matricBoard.value,
+    matricYear: parseInt(formRef.current.elements.matricYear.value),
+    matricMarks: formRef.current.elements.matricMarks.value,
+    interRoll: formRef.current.elements.interRoll.value,
+    interBoard: formRef.current.elements.interBoard.value,
+    interYear: formRef.current.elements.interYear.value,
+    interMarks: formRef.current.elements.interMarks.value,
+    program: formRef.current.elements.program.value.toUpperCase(),
+    hostel: formRef.current.elements.hostel.checked,
+    transport: formRef.current.elements.transport.checked,
+    scholarship: formRef.current.elements.scholarship.checked,
+  };
 
-    // pass collected data to signup page
-    navigate("/signup", { state: { studentDetails: formData } });
+  // ✅ Build FormData instead of plain object
+const fd = new FormData();
+
+fd.append("user", new Blob([JSON.stringify(details)], { type: "application/json" }));
+fd.append("studentDetail", new Blob([JSON.stringify(studentDetail)], { type: "application/json" }));
+
+fd.append("matricCertificate", formRef.current.elements.matricCertificate.files[0]);
+fd.append("interCertificate", formRef.current.elements.interCertificate.files[0]);
+fd.append("domicile", formRef.current.elements.domicile.files[0]);
+
+// Debug FormData
+for (let [key, value] of fd.entries()) {
+  console.log(key, value);
+}
+
+  // Send to backend
+  dispatch(signupThunk(fd))
+    .then(res => {
+      console.log("Signup response:", res);
+      if(res?.meta.requestStatus=="rejected"){
+        setError(res.payload.message +" "+ res.payload.data?.email||null)
+      }
+      else{
+        open("/")
+      }
+      console.log(role,isAuthenticated)
+      // open("/")
+
+    })
+    .catch(err => {
+      console.error("Signup error:", err);
+    }); 
+
   };
 
   return (
@@ -154,6 +194,9 @@ const StudentDetailPage = () => {
           <label>
             <input type="checkbox" name="scholarship" /> Apply for Scholarship
           </label>
+        </div>
+        <div className="eroor color-danger" style={{color:"red"}}>
+         {error && error != "" && error}
         </div>
 
         <button type="submit" className={styles.button}>Continue to Signup</button>

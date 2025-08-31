@@ -148,7 +148,7 @@ const AppContextProvider = ({ children }) => {
         setShowSpinner,
       }}
     >
-      {children}
+     {children}
     </AppContext.Provider>
   );
 };

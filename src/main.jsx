@@ -27,6 +27,7 @@ import NotFound from './pages/NotFound.jsx';
 import About from './pages/About.jsx';
 import { Provider } from 'react-redux';
 import {useSelector , useDispatch } from 'react-redux';
+import FileUpload from './component/FileUpload.jsx';
 
 function AppRoutes() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     children: [
-      { path: "", element: <Home /> },
+      { path: '', element: <Home /> },
       { path: 'login', element: <Login /> },
       { path: 'signup', element: <SignUp /> },
 
@@ -62,12 +63,17 @@ const router = createBrowserRouter([
       {
         path: 'studentDetail',
         element: (
-          <ProtectedRoutes isAuthenticated={isAuthenticated}>
+          
             <StudentDetailPage />
-          </ProtectedRoutes>
+          
         )
       }
+
     ,
+    {
+      path: 'fileUpload',
+      element : <FileUpload />
+    }
 
     ]
   },

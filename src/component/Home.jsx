@@ -12,6 +12,8 @@ const Home = () => {
   const isAuthenticated = useSelector((a)=>a.auth.isAuthenticated)
   console.log(role)
 
+  
+
     const handleLogout = () => {
       dispatch(logout());
     };
@@ -27,7 +29,7 @@ const Home = () => {
         ],
       },
       STUDENT: {
-        title: "Welcome Student 🎓",
+        title: `Welcome 🎓`,
         items: [
           "📚 View your courses & timetable",
           "📝 Check grades & assignments",
@@ -56,7 +58,7 @@ const Home = () => {
       const rolekey = role.toUpperCase();
       return (
         
-        <section className={styles.roleSection}>
+        <section className={styles.roleSection} >
           <h2>{roleContent[rolekey].title}</h2>
           <ul>
             {roleContent[rolekey].items.map((item, idx) => (

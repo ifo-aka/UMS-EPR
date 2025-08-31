@@ -1,5 +1,33 @@
-// src/DbQuery.js
+
 // NOTE: Remove any AppContext usage from here. This file just talks to the backend.
+ 
+export const  signupStudent= async (signupStudentObject)=>{
+      console.log(JSON.stringify(signupStudentObject));
+      const url = "http://localhost:8080/auth/signup/student";
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+        
+          body: signupStudentObject,
+        });
+        if (!response.ok) {
+          const error = await response.json();
+          console.log(error)
+          return error;
+        }
+        return await response.json();
+      } catch (error) {
+        console.error("Error signing up:", error);
+        throw error;
+      }
+};
+
+
+
+
+
+
+
 
 export const addOneStudent = async (studentObjectfrom) => {
   console.log(JSON.stringify(studentObjectfrom));

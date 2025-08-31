@@ -20,6 +20,7 @@ function App() {
    <MainAndHeader>
        <Header />
        <main>
+         
       <Outlet />
       </main>
    </MainAndHeader>

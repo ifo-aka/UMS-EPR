@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../StyleSheets/SignUp.module.css";
 import { useRef } from "react";
-import { Form } from "react-router-dom";
+import { Form,useNavigate } from "react-router-dom";
 const SignUp = () => {
   let [showErrorMessage, setShowErrorMessage] = useState(false);
   let [bothSame, setBothSame] = useState(null);
@@ -11,7 +11,7 @@ const SignUp = () => {
   let [confirmPassword, setConfirmPassword] = useState(null);
 let  [isPasswordValid, setIsPasswordValid] = useState(null);
 const [isPassOkToSubmit,setIsPassOkToSubmit] = useState(false);
-
+  const navigate = useNavigate();
 
 const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
 useEffect(() => {
@@ -58,13 +58,20 @@ useEffect(() => {
 
   const handleSignUp = async (event) => {
     event.preventDefault();
-    let name = formRef.current.elements.name.value;
+    let username = formRef.current.elements.name.value;
     let email = formRef.current.elements.email.value;
     let role = formRef.current.elements.role.value;
     let password = formRef.current.elements.password.value;
     console.log("ok" + isPassOkToSubmit)
     if(isPassOkToSubmit){
+      console.log(role)
+        if(role == "user"){
+          
+        }
+        else if (role == "student"){
+          navigate("/StudentDetail",{state : {studentDetails: {username, email, role, password}}})
 
+        }
     }else{
         setHandleErrorHeading("Password Mismatch")
         setHandleErrorMessage("please match your password ")

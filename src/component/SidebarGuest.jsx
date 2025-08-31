@@ -34,7 +34,7 @@ const SidebarGuest = () => {
 
   return (
     <>
-      {isDesktopDimention ? (
+     
         <aside className={styles.sidebarContainer}>
           <div className={styles.sidebar}>
             <h2 className={styles.title}>Explore</h2>
@@ -63,13 +63,7 @@ const SidebarGuest = () => {
             </div>
           </div>
         </aside>
-      ) : (
-        <div className={styles.hamburger}>
-          <span className={styles.bar}></span>
-          <span className={styles.bar}></span>
-          <span className={styles.bar}></span>
-        </div>
-      )}
+
     </>
   );
 };

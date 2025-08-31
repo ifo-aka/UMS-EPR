@@ -1,7 +1,7 @@
 /* Sidebar Container */
 .sidebarContainer {
-  width: 280px;
-  min-width: 240px;
+  width: 220px;
+  min-width: 210px;
   min-height: 100vh;
  background: linear-gradient(135deg, #172441, #1e293b);
   -webkit-backdrop-filter: blur(12px);
@@ -135,11 +135,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 42px;
-  height: 42px;
+  width: 45px;
+  height: 45px;
   cursor: pointer;
   position: absolute;
-  top: 180px;
+  top: 10px;
   left: 20px;
   background: rgba(229, 68, 213, 0.15);
   border-radius: 50%;
