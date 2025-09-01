@@ -1,18 +1,14 @@
 /* ========== CONTAINER & DASHBOARD ========== */
-.container {
-  min-height: 100vh;
-  padding: 2rem 0;
-  width: 100%;
-  background: linear-gradient(135deg, #1e1e2f 0%, #141420 100%);
-  color: #fff;
-}
+
 
 .dashboard {
-  max-width: 95%;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  max-width: 100%;
+  /* margin: 0 auto; */
+  /* height: 100vh; */
+  padding: 1rem;
   background: rgba(30, 30, 47, 0.85);
-  border-radius: 20px;
+  border-radius: 0px;
   box-shadow: 0 8px 30px rgba(192, 57, 133, 0.15);
   backdrop-filter: blur(12px);
   animation: fadeIn 0.6s ease;

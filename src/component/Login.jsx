@@ -1,14 +1,14 @@
 import { Link ,Form} from "react-router-dom";
 import styles from "../StyleSheets/Login.module.css";
 
-import { useRef, useState} from "react";
+import { useEffect, useRef, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import {  useDispatch } from "react-redux";
-import {
- setRole
-} from "../store/slices/authSlice";
+import { useSelector } from "react-redux";
+
 import { loginThunk } from "../store/slices/authSlice";
 import { setShowSpinner } from "../store/slices/authSlice";
+import Container from "./Container";
 
 
 
@@ -17,6 +17,7 @@ import { setShowSpinner } from "../store/slices/authSlice";
 
 
 const Login = () => {
+    const isAuthenticated = useSelector((s)=>s.auth.isAuthenticated)
     const [error,setError] = useState("");
  const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -27,6 +28,7 @@ const Login = () => {
     //     emailRef.current.value="ifham";
     // })
     const handleSubmit = async (event) => {
+        
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
@@ -38,37 +40,38 @@ const Login = () => {
         .then((res) => {
           console.log(res.payload);
           if(!res.payload.success){
-          const {body} = res.payload;
-         let parsedBody = JSON.parse(body)
-         setError(parsedBody.message)
+
+             setError(res.payload.error)
+             dispatch(setShowSpinner(false))
+        
          setTimeout(() => {
             setError("")
          }, 2000);
           }
+      })
+      .finally(
+        // dispatch( setShowSpinner(false))
+      );
       
-         
-          
 
-            if (res.success == true ) {
+    };
+    useEffect(()=>{
+        console.log(isAuthenticated)
+               if (isAuthenticated ) {
                 console.log("navigating")
           
             navigate("/");
+            // navigate("/")
    
-        // emailRef.current.value="";
-        // passwordRef.current.value="";
-  console.log("login success")
+            emailRef.current.value="";
+           passwordRef.current.value="";
+             console.log("login success")
   
-    dispatch( setShowSpinner(false));
-  }
-
-           
-          
-        });
-
-    };
+               dispatch( setShowSpinner(false));
+         }
+        },[isAuthenticated])
     return (
-        
-        <div  className={styles.loginContainer}>
+            <Container>
             <Form className={styles.loginForm} onSubmit={handleSubmit}>
                 <h2 className={styles.loginTitle}>Login Here To Continue</h2>
                 <input
@@ -107,7 +110,7 @@ const Login = () => {
                 </div>
                
             </Form>
-        </div>
+        </Container>
     );
 }
 export default Login;

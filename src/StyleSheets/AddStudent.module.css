@@ -1,15 +1,5 @@
 /* ====== Container ====== */
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  width: 100%;
-  padding: 2rem 1rem;
-  background: linear-gradient(135deg, #1c1c2b, #2a1d35);
-  color: #fff;
-  font-family: "Inter", sans-serif;
-}
+
 
 /* ====== Form ====== */
 .form {

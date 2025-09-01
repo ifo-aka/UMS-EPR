@@ -1,6 +1,6 @@
-/* Home.module.css */
+/* Home.module.css
 
-/* General Page Layout */
+General Page Layout
 .container {
   min-height: 100vh;
   width: 100%;
@@ -14,7 +14,7 @@
   gap: 2rem;
 }
 
-/* Headings */
+Headings
 .title {
   font-size: 3rem;
   font-weight: 700;
@@ -37,7 +37,7 @@ padding-bottom: 15px;
   animation: fadeInUp 1.2s ease-in-out;
 }
 
-/* Button Styling */
+Button Styling
 .buttonGroup {
   display: flex;
   gap: 1rem;
@@ -97,7 +97,7 @@ padding-bottom: 15px;
   box-shadow: 0 6px 18px rgba(56, 189, 248, 0.5);
 }
 
-/* Card Section (if needed for future) */
+Card Section (if needed for future)
 .card {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -113,7 +113,7 @@ padding-bottom: 15px;
   border-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Animations */
+Animations
 @keyframes fadeInDown {
   from {
     opacity: 0;
@@ -136,7 +136,7 @@ padding-bottom: 15px;
   }
 }
 
-/* Responsive */
+Responsive
 @media (max-width: 768px) {
   .title {
     font-size: 2.2rem;
@@ -151,4 +151,4 @@ padding-bottom: 15px;
     width: 100%;
     text-align: center;
   }
-}
+} */

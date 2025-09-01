@@ -92,7 +92,7 @@ const Home = () => {
   };
 
   return (
-    <main className={styles.container}>
+    <div className={styles.container}>
       {renderRoleBasedHome()}
 
       {isAuthenticated && (
@@ -112,7 +112,7 @@ const Home = () => {
           <div className={styles.featureCard}>📱 Responsive design for any device</div>
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 

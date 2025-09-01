@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import styles from "../StyleSheets/SignUp.module.css"; // reuse your signup styling
 import { signupThunk } from "../store/slices/authSlice";
 import {useSelector, useDispatch } from "react-redux";
+import Container from "./Container";
 
 
 
@@ -78,7 +79,7 @@ for (let [key, value] of fd.entries()) {
   };
 
   return (
-    <div className={styles.container} >
+    <Container>
       <Form className={styles.form} ref={formRef} onSubmit={handleSubmit} encType="multipart/form-data">
         <h2>Student Admission Details</h2>
 
@@ -201,7 +202,7 @@ for (let [key, value] of fd.entries()) {
 
         <button type="submit" className={styles.button}>Continue to Signup</button>
       </Form>
-    </div>
+    </Container>
   );
 };
 

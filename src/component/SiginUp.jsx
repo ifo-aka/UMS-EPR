@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "../StyleSheets/SignUp.module.css";
 import { useRef } from "react";
 import { Form,useNavigate } from "react-router-dom";
+import Container from "./Container";
 const SignUp = () => {
   let [showErrorMessage, setShowErrorMessage] = useState(false);
   let [bothSame, setBothSame] = useState(null);
@@ -89,7 +90,8 @@ useEffect(() => {
   };
 
   return (
-    <div className={styles.container}>
+    
+    <Container>
       <Form className={styles.form} onSubmit={handleSignUp} ref={formRef}>
         <h2>Lets make your account</h2>
         <div className={styles.field}>
@@ -161,7 +163,7 @@ useEffect(() => {
           <p>{handleErrorMessage}</p>
         </div>
       )}
-    </div>
+    </Container>
   );
 };
 export default SignUp;

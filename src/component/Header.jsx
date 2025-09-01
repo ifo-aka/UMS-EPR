@@ -12,10 +12,8 @@ const Header = () => {
   return (
     <div className={styles.header}>
       <div className={styles.HeadingCont}>
-        <h1 className={styles.logo}>University Name</h1>
-        <div className={styles.profile}>
-          <HiUser size={24} color={"rgb(230, 97, 173)"} />
-        </div>
+        <h1 className={styles.logo}>Logo</h1>
+    
       </div>
 
       <nav className={styles.nav}>
@@ -25,11 +23,15 @@ const Header = () => {
               {isMobileDimention ? <HiHome size={20} /> : "Home"}
             </li>
           </Link>
-          <Link to="/about">
+          { isAuthenticated &&
+          <Link to="/profile">
             <li className={styles.li}>
-              {isMobileDimention ? <HiInformationCircle size={20} /> : "About"}
+                 <div className={styles.profile}>
+         {isMobileDimention ? <HiUser size={24} color={"rgba(239, 232, 236, 1)"} /> : "Profile" }
+        </div>
             </li>
           </Link>
+}
           <Link to="/version">
             <li className={styles.li}>
               {isMobileDimention ? <HiDocumentText size={20} /> : "Version"}

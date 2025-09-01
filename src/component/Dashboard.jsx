@@ -14,19 +14,26 @@ import {
   clearSearchResults,
   setRecentStudents,
 } from "../store/slices/studentSlice"; // ensure this path is correct
+import Container from "./Container";
 
 let Dashboard = () => {
   const dispatch = useDispatch();
 
-  const studentPaginationObject = useSelector((s) => s.students.studentPaginationObject);
+  const studentPaginationObject = useSelector(
+    (s) => s.students.studentPaginationObject
+  );
   const recentStudents = useSelector((s) => s.students.recentStudents);
   const searchResults = useSelector((s) => s.students.searchResults);
   const departmentCount = useSelector((s) => s.students.departmentCount);
   const isAdmin = useSelector((s) => s.auth.isAdmin);
   const role = useSelector((s) => s.auth.role);
 
-  const { studentList = [], currentPage = 0, totalElements = 0, totalPages = 0 } =
-    studentPaginationObject ?? {};
+  const {
+    studentList = [],
+    currentPage = 0,
+    totalElements = 0,
+    totalPages = 0,
+  } = studentPaginationObject ?? {};
 
   // UI state (kept local)
   const [search, setSearch] = useState("");
@@ -37,7 +44,11 @@ let Dashboard = () => {
 
   // Derived list to render
   const studentToShow =
-    tableToShow === "Search" ? searchResults : tableToShow === "Recent" ? recentStudents : studentList;
+    tableToShow === "Search"
+      ? searchResults
+      : tableToShow === "Recent"
+      ? recentStudents
+      : studentList;
 
   const initialFetchedRef = useRef(false);
 
@@ -51,13 +62,18 @@ let Dashboard = () => {
         const payload = action.payload ?? {};
         // payload might already be inner data (because thunk returns result.data ?? result)
         const data = payload?.studentList || payload;
-        const total = payload?.totalPages ?? payload?.data?.totalPages ?? payload?.totalPages;
+        const total =
+          payload?.totalPages ??
+          payload?.data?.totalPages ??
+          payload?.totalPages;
         if (total && total > 1) {
           // fetch last page (thunk returns inner data)
           dispatch(fetchLastPageThunk(total)).then((lastAction) => {
             const lastPayload = lastAction.payload ?? {};
             // setRecentStudents expects array or object with studentList
-            const arr = lastPayload?.studentList ?? (Array.isArray(lastPayload) ? lastPayload : []);
+            const arr =
+              lastPayload?.studentList ??
+              (Array.isArray(lastPayload) ? lastPayload : []);
             dispatch(setRecentStudents(arr));
           });
         } else if (payload?.studentList) {
@@ -80,8 +96,16 @@ let Dashboard = () => {
 
   // Debounced search effect — dispatch search thunk when user stops typing
   useEffect(() => {
-    if (debouncedSearchValue && debouncedSearchValue.toString().trim().length > 0) {
-      dispatch(searchStudentsThunk({ filter: searchFilter, value: debouncedSearchValue }))
+    if (
+      debouncedSearchValue &&
+      debouncedSearchValue.toString().trim().length > 0
+    ) {
+      dispatch(
+        searchStudentsThunk({
+          filter: searchFilter,
+          value: debouncedSearchValue,
+        })
+      )
         .then((action) => {
           if (action.meta?.requestStatus === "fulfilled") {
             setTableToShow("Search");
@@ -125,7 +149,7 @@ let Dashboard = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <Container>
       <div className={styles.dashboard}>
         <div className={styles.herocont}>
           <div className={styles.Usericon}>
@@ -226,7 +250,11 @@ let Dashboard = () => {
                       <td>{student.age}</td>
                       <td>{student.department}</td>
                       <td className={styles.tableActions}>
-                        <button title="Edit" className={styles.actionBtn} onClick={() => handleEdit(student)}>
+                        <button
+                          title="Edit"
+                          className={styles.actionBtn}
+                          onClick={() => handleEdit(student)}
+                        >
                           <EditIcon />
                         </button>
                         <button
@@ -252,7 +280,10 @@ let Dashboard = () => {
 
           {tableToShow === "All" && (
             <div className={styles.paginationControls}>
-              <button disabled={currentPage === 0} onClick={() => onPageChange(currentPage - 1)}>
+              <button
+                disabled={currentPage === 0}
+                onClick={() => onPageChange(currentPage - 1)}
+              >
                 Prev
               </button>
               <button
@@ -265,7 +296,7 @@ let Dashboard = () => {
           )}
         </>
       </div>
-    </div>
+    </Container>
   );
 };
 

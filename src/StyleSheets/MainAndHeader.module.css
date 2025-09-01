@@ -15,10 +15,10 @@ max-height: max-content;
 @media screen  and (max-width : 768px){
     .container{
  min-height: 80vh;
-        max-height: fit-content;
+        max-height: max-content;
         width: 100%;
         display: flex;
-        margin-bottom: 10px;
+        
 
     }
     

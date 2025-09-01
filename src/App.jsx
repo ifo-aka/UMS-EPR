@@ -1,34 +1,30 @@
-
 import Header from './component/Header'
 import Sidebar from "./pages/Sidebar"
-// import Main  from './component/Main'
 import Footer from './component/Footer'
 import MainAndHeader from './component/MainAndHeader'
 import AppContextProvider from './store/AppContextProvider'
-// import Home from './component/Home'
-import { Outlet } from 'react-router-dom';
-import "bootstrap/dist/css/bootstrap.min.css";
-import MasterConatiner from './component/MasterContainer'
+import { Outlet, useLocation } from 'react-router-dom'
+import "bootstrap/dist/css/bootstrap.min.css"
+import MasterContainer from './component/MasterContainer'
 
 function App() {
-   return <>
+  const location = useLocation()
 
-   <AppContextProvider>
-      <MasterConatiner>
-      <Sidebar />
-  
-   <MainAndHeader>
-       <Header />
-       <main>
-         
-      <Outlet />
-      </main>
-   </MainAndHeader>
-   </MasterConatiner>
-   <Footer />
-  </AppContextProvider>
-</>
+  return (
+        <>
+      <MasterContainer >
+        <Sidebar />
+        <MainAndHeader>
+          <Header />
+          <main >
+            <Outlet  />
+          </main>
+        </MainAndHeader>
+      </MasterContainer>
+      <Footer />
+      </>
    
+  )
 }
 
 export default App

@@ -122,6 +122,7 @@ const authSlice = createSlice({
       })
       .addCase(loginThunk.fulfilled, (state, action) => {
         const { token, role } = action.payload.data;
+        console.log(role)
         console.log(action.payload)
         state.token = token;
         state.role = role || "Guest";

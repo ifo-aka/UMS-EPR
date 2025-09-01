@@ -1,4 +1,4 @@
-import { StrictMode, use } from 'react';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   createBrowserRouter,
@@ -6,87 +6,66 @@ import {
 } from 'react-router-dom';
 import './index.css';
 
-// Context
- import AppContextProvider from './store/AppContextProvider.jsx';
-import { AppContext } from './store/AppContext.jsx';
+import { Provider, useSelector } from 'react-redux';
 import store from "./store"
 
-// Pages/Components
+// Context
+import AppContextProvider from './store/AppContextProvider.jsx';
+
+// Layout
 import App from './App.jsx';
+
+// Pages
 import Home from './component/Home.jsx';
 import Login from './component/Login.jsx';
 import Dashboard from './component/Dashboard.jsx';
-
-// import Main from './component/Main.jsx';
-import ProtectedRoutes from './component/ProtectedRoutes.jsx';
-import { useContext } from 'react';
 import SignUp from './component/SiginUp.jsx';
 import AddStudentFrom from './component/AddStudentFrom.jsx';
 import StudentDetailPage from './component/StudentDetailPage.jsx';
+import FileUpload from './component/FileUpload.jsx';
 import NotFound from './pages/NotFound.jsx';
 import About from './pages/About.jsx';
-import { Provider } from 'react-redux';
-import {useSelector , useDispatch } from 'react-redux';
-import FileUpload from './component/FileUpload.jsx';
+
+// Auth
+import ProtectedRoutes from './component/ProtectedRoutes.jsx';
 
 function AppRoutes() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-// Fix nested route paths and casing
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    children: [
-      { path: '', element: <Home /> },
-      { path: 'login', element: <Login /> },
-      { path: 'signup', element: <SignUp /> },
-
- 
-      {
-        path: 'addStudentForm',
-        element: (
-          <ProtectedRoutes isAuthenticated={isAuthenticated}>
-            <AddStudentFrom />
-          </ProtectedRoutes>
-        ),
-      
-      },
-      {
-        path: 'dashboard',
-        element: (
-          <ProtectedRoutes isAuthenticated={isAuthenticated}>
-            <Dashboard />
-          </ProtectedRoutes>
-        )
-      },
-      {
-        path: 'studentDetail',
-        element: (
-          
-            <StudentDetailPage />
-          
-        )
-      }
-
-    ,
+  const router = createBrowserRouter([
     {
-      path: 'fileUpload',
-      element : <FileUpload />
-    }
+      path: '/',
+      element: <App />, // Layout with Sidebar + Header + Outlet
+      children: [
+        { index: true, element: <Home /> }, // this is "/"
+        
+        { path: 'login', element: <Login /> },
+    { path: 'signup', element: <SignUp /> },
+        {  path: 'addStudentForm',
+          element: (
+            <ProtectedRoutes isAuthenticated={isAuthenticated}>
+              <AddStudentFrom />
+            </ProtectedRoutes>
+          ),
+        },
+        {
+          path: 'dashboard',
+          element: (
+            <ProtectedRoutes isAuthenticated={isAuthenticated}>
+              <Dashboard />
+            </ProtectedRoutes>
+          ),
+        },
+        { path: 'studentDetail', element: <StudentDetailPage /> },
+        { path: 'fileUpload', element: <FileUpload /> },
+      ],
+    },
 
-    ]
-  },
-  {
-    path: "/about",
-    element: <About />
-  },
-      {
-      path : "*",
-      element : <NotFound />
-    }
-]);
-
+    // Standalone routes (no App layout)
+    
+    { path: '/about', element: <About /> },
+    { path: '*', element: <NotFound /> },
+  ]);
 
   return <RouterProvider router={router} />;
 }
