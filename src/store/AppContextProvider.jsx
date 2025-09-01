@@ -8,11 +8,23 @@ import {
   setIsMobileDimention,
   setIsDesktopDimention,
 } from "./slices/uiSlice";
+import {
+  
+  restoreAuthFromLocalStorage,
+ 
+  
+} from "./slices/authSlice"
 
 const AppContextProvider = ({ children }) => {
   const prevWidth = useRef(window.innerWidth)
 
   const dispatch = useDispatch();
+    useEffect(() => {
+
+    dispatch(restoreAuthFromLocalStorage()).then((res) => {
+    //will perform tasks
+    });
+  }, [dispatch]);
 
   useLayoutEffect(() => {
     const width = window.innerWidth;
