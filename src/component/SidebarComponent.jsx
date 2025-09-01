@@ -1,10 +1,20 @@
 // src/components/Sidebar.jsx
 import styles from "../StyleSheets/Sidebar.module.css";
 import { Link, useLocation } from "react-router-dom";
-import { AppContext } from "../store/AppContext";
+// import { AppContext } from "../store/AppContext";
 import { useContext, useEffect, useState , useRef} from "react";
+import { useSelector } from "react-redux";
+  import {
+    
+    setSideBarActiveLink,
+    
+    
+  } from "../store/slices/uiSlice"
 
 const SidebarComponent = ({ role = "guest" }) => {
+
+  const {sideBarActiveLink,isMobileDimention} = useSelector((s)=>s.ui)
+
   const [isOpen, setIsOpen] = useState(false);
   const overlayRef = useRef();
   const sidebarRef = useRef();
@@ -17,12 +27,7 @@ const  handleOverLayClick=(event)=>{
   }
   }
   console.log(role)
-  const {
-    sideBarActiveLink,
-    setSideBarActiveLink,
-    isDesktopDimention,
-    isMobileDimention,
-  } = useContext(AppContext);
+
 
   const { pathname } = useLocation();
 

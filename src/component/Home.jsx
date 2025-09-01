@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../store/AppContext';
+
+import styles from "../StyleSheets/Home.module.css"
 import { Link } from 'react-router-dom';
-import styles from '../StyleSheets/Home.module.css';
+// import styles from '../StyleSheets/Home.module.css';
 import { useSelector,useDispatch } from 'react-redux';
 import {
   logout

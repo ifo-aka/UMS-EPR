@@ -4,12 +4,14 @@ import { AppContext } from "./AppContext";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
-  setSideBarActiveLink as setSideBarActiveLinkAction,
+  setSideBarActiveLink ,
   setIsMobileDimention,
   setIsDesktopDimention,
 } from "./slices/uiSlice";
 
 const AppContextProvider = ({ children }) => {
+  const prevWidth = useRef(window.innerWidth)
+
   const dispatch = useDispatch();
 
   useLayoutEffect(() => {
@@ -42,27 +44,6 @@ const AppContextProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        studentPaginationObject,
-        authChecked,
-        isAuthenticated,
-        isAdmin,
-        showSpinner,
-        sideBarActiveLink,
-        studentObject,
-        isMobileDimention,
-        isDesktopDimention,
-        recentStudents,
-        role,
-        login,
-        setSideBarActiveLink,
-        fetchStudents,
-        logout,
-        setStudentObject,
-        addStudent,
-        setRecentStudents,
-        // if you still used dbNoOfDeparts from DbQuery directly, pass it through context too:
-        // dbNoOfDeparts,
-        setShowSpinner,
       }}
     >
      {children}
