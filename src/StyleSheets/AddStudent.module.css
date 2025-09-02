@@ -1,6 +1,5 @@
 /* ====== Container ====== */
 
-
 /* ====== Form ====== */
 .form {
   margin-top: 2rem;
@@ -16,7 +15,7 @@
 
 .form:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(219, 56, 181, 0.35);
+  box-shadow: 0 12px 40px rgba(219, 56, 181, 0.35); /* accent shadow */
 }
 
 .formGroup {
@@ -28,25 +27,25 @@
 .label {
   margin-bottom: 0.5rem;
   font-weight: 600;
-  color: #f0f0f0;
+  color: var(--text-secondary);
   font-size: 0.95rem;
   letter-spacing: 0.5px;
 }
 
 .input {
   padding: 0.75rem 1rem;
-  border: 1px solid #ec6df1;
+  border: 1px solid var(--accent-alt);
   border-radius: 10px;
   font-size: 1rem;
   transition: all 0.25s ease;
-  background-color: #15171c;
-  color: #fff;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
 }
 
 .input:focus {
-  border-color: #db38b5;
+  border-color: var(--accent);
   outline: none;
-  box-shadow: 0 0 8px rgba(219, 56, 181, 0.5);
+  box-shadow: 0 0 8px rgba(219, 56, 181, 0.5); /* accent glow */
 }
 
 /* ====== Buttons ====== */
@@ -63,21 +62,21 @@
 }
 
 .button {
-  background: linear-gradient(135deg, #db38b5, #ec6df1);
-  color: #fff;
+  background: var(--gradient-accent);
+  color: var(--text-primary);
   border: none;
   box-shadow: 0 4px 16px rgba(219, 56, 181, 0.4);
 }
 
 .button:hover {
   transform: translateY(-2px);
-  background: linear-gradient(135deg, #ec6df1, #db38b5);
+  background: var(--gradient-accent-reverse);
   box-shadow: 0 6px 24px rgba(236, 109, 241, 0.45);
 }
 
 .addstudentbtn {
-  background: linear-gradient(135deg, #e661ad, #db38b5);
-  color: #fff;
+  background: var(--gradient-accent-hot);
+  color: var(--text-primary);
   border: none;
   width: auto;
   display: inline-block;
@@ -85,7 +84,7 @@
 }
 
 .addstudentbtn:hover {
-  background: linear-gradient(135deg, #db38b5, #e661ad);
+  background: var(--gradient-accent-hot-reverse);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(230, 97, 173, 0.55);
 }
@@ -109,8 +108,8 @@
 }
 
 .studentsTable th {
-  background: linear-gradient(135deg, #db38b5, #ec6df1);
-  color: #fff;
+  background: var(--gradient-accent);
+  color: var(--text-primary);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -131,5 +130,5 @@
 
 .studentsTable td {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  color: #f0f0f0;
+  color: var(--text-secondary);
 }

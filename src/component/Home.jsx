@@ -6,6 +6,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import {
   logout
 } from "../store/slices/authSlice";
+import Container from "./Container";
 const Home = () => {
   const dispatch = useDispatch();
   const role = useSelector((s) => s.auth.role);
@@ -59,12 +60,12 @@ const Home = () => {
       return (
         
         <section className={styles.roleSection} >
-          <h2>{roleContent[rolekey].title}</h2>
-          <ul>
+          <h2 className={styles.title}>{roleContent[rolekey].title}</h2><hr className={styles.hr}/>
+          <ul className={styles.cardContainer}>
             {roleContent[rolekey].items.map((item, idx) => (
-              <li key={idx}>{item}</li>
+              <li key={idx} className={styles.card}>{item} </li>
             ))}
-          </ul>
+          </ul> 
         </section>
       );
     }
@@ -92,27 +93,43 @@ const Home = () => {
   };
 
   return (
-    <div className={styles.container}>
+  <>
       {renderRoleBasedHome()}
 
-      {isAuthenticated && (
+            <section className={styles.announcementSection}>
+          <hr className={styles.hr} />
+          <h2 className={styles.featuresTitle}>📢 Latest Announcements</h2>
+          <ul className={styles.announcementCardContainer}>
+            <li className={styles.announcementCard}>🗓️ Midterm exams start from 10th Sept</li>
+            <li className={styles.announcementCard}>📚 Library timings updated: 8AM - 8PM</li>
+            <li className={styles.announcementCard}>⚡ New feature: Online attendance tracking</li>
+          </ul>
+        </section>
+
+      <section className={styles.featureCard}>
+        <hr/>
+        <h2 className={styles.featuresTitle}>General Features</h2>
+        <div className={styles.cardContainer}>
+          <div className={styles.card}>📂 View and organize student data</div>
+          <div className={styles.card}>🔒 Secure sessions and data protection</div>
+          <div className={styles.card}>✨ Easy-to-use interface</div>
+          <div className={styles.card}>📱 Responsive design for any device</div>
+        </div>
+      </section>
+       {/* --- Announcements Section --- */}
+
+  
+      
+
+          {isAuthenticated && (
         <div className={styles.actions}>
           <button onClick={handleLogout} className={styles.button}>
             Logout
           </button>
         </div>
       )}
-
-      <section className={styles.features}>
-        <h2 className={styles.featuresTitle}>General Features</h2>
-        <div className={styles.featuresGrid}>
-          <div className={styles.featureCard}>📂 View and organize student data</div>
-          <div className={styles.featureCard}>🔒 Secure sessions and data protection</div>
-          <div className={styles.featureCard}>✨ Easy-to-use interface</div>
-          <div className={styles.featureCard}>📱 Responsive design for any device</div>
-        </div>
-      </section>
-    </div>
+    
+   </>
   );
 };
 

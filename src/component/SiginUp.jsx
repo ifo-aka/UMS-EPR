@@ -93,7 +93,7 @@ useEffect(() => {
     
     <Container>
       <Form className={styles.form} onSubmit={handleSignUp} ref={formRef}>
-        <h2>Lets make your account</h2>
+        <h2 className={styles.heading}>Lets make your account</h2>
         <div className={styles.field}>
           <label htmlFor="name">Name</label>
           <input type="text" id="name" name="name" required />

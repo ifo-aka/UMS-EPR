@@ -3,7 +3,7 @@ import styles from "../StyleSheets/Sidebar.module.css";
 import { Link, useLocation } from "react-router-dom";
 // import { AppContext } from "../store/AppContext";
 import { useContext, useEffect, useState , useRef} from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
   import {
     
     setSideBarActiveLink,
@@ -12,9 +12,9 @@ import { useSelector } from "react-redux";
   } from "../store/slices/uiSlice"
 
 const SidebarComponent = ({ role = "guest" }) => {
-
+const dispatch = useDispatch()
   const {sideBarActiveLink,isMobileDimention} = useSelector((s)=>s.ui)
-
+console.log(isMobileDimention)
   const [isOpen, setIsOpen] = useState(false);
   const overlayRef = useRef();
   const sidebarRef = useRef();
@@ -27,6 +27,7 @@ const  handleOverLayClick=(event)=>{
   }
   }
   console.log(role)
+  console.log(isOpen)
 
 
   const { pathname } = useLocation();
@@ -70,9 +71,9 @@ console.log(role)
   useEffect(() => {
     const allValidLinks = linksToShow.map((l) => l.to);
     if (allValidLinks.includes(pathname)) {
-      setSideBarActiveLink(pathname);
+      dispatch(setSideBarActiveLink(pathname));
     } else {
-      setSideBarActiveLink(null);
+      dispatch(setSideBarActiveLink(null));
     }
   }, [pathname, setSideBarActiveLink, linksToShow]);
 

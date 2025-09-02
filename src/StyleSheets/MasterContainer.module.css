@@ -1,8 +1,29 @@
-.container{
-    display: flex;
+/* ===== Main Container ===== */
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 1000px;
+  max-height: max-content;
+  background: var(--gradient-surface);
+  transition: background 0.3s ease, min-height 0.3s ease;
+}
+
+/* Tablet Landscape (950px – 1024px) */
+@media screen and (min-width: 950px) and (max-width: 1024px) {
+  .container {
+    min-height: 1200px;
+    max-height: 100vh;
+    background: var(--gradient-surface-alt, var(--gradient-surface));
+  }
+}
+
+/* Mobile (≤768px) */
+@media screen and (max-width: 768px) {
+  .container {
+    min-height: 100vh; /* cleaner scaling */
     max-height: max-content;
-    min-height: 100vh;
-    /* background-color: red; */
-    
-    
+    width: 100%;
+    background: var(--bg-secondary); /* fallback solid background */
+  }
 }

@@ -1,4 +1,4 @@
-/* ====== Container ====== */
+/*SignUp.module.css */
 .container {
   width: 100%;
   display: flex;
@@ -6,7 +6,7 @@
   flex-direction: column;
   align-items: center;
   padding: 2rem 1rem;
-  background: linear-gradient(135deg, #0f172a, #1e293b);
+  background: var(--gradient-surface); /* #0f172a → #1e293b */
   min-height: 100vh;
   font-family: "Inter", sans-serif;
 }
@@ -19,9 +19,9 @@
   min-width: 320px;
   padding: 2rem;
   border-radius: 16px;
-  background: rgba(43, 43, 60, 0.9);
+  background: var(--bg-primay);
   backdrop-filter: blur(10px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  box-shadow:0 8px 24px  var(--shadow-primary);
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -30,7 +30,7 @@
 
 .form:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(224, 75, 177, 0.25);
+  box-shadow: 0 12px 32px var(--shadow-primary-hover);
 }
 
 /* ====== Fields ====== */
@@ -39,42 +39,47 @@
   flex-direction: column;
   gap: 0.5rem;
 }
+.heading{
+  color: var(--text-primary);
+}
 
 .field label {
-  color: #ec6df1;
+  color: var(--accent-color);
   font-weight: 600;
   letter-spacing: 0.5px;
 }
 
 .field input,
 .field select {
-  padding: 0.65rem 0.9rem;
+  padding: 0.75rem 1rem;
+  margin: 15px 0px;
+  border-radius: 5px;
   font-size: 1rem;
+  outline: none;
   border: none;
-  border-radius: 10px;
-  background-color: #1e1e2f;
-  border-bottom: 2px solid #e04bb1;
-  color: #fff;
-  transition: all 0.3s ease;
+  border-bottom: 2px solid var(--accent-hr);
+  transition: border-color 0.2s;
+  background-color: var(--glass-bg); /* softer in light mode */
+  color: var(--text-primary);
 }
 
 .field input:focus,
 .field select:focus {
   outline: none;
-  border-bottom: 2px solid #ec6df1;
-  box-shadow: 0 0 8px rgba(236, 109, 241, 0.4);
+  border-bottom: 2px solid var(--accent-color);
+  box-shadow: 0 0 8px var(--accent-glow);
 }
 
 /* ====== Warning/Error States ====== */
 .warning:focus {
-  border-bottom: 2px solid red !important;
-  color: #ff6b6b;
+  border-bottom: 2px solid var(--error-color) !important;
+  color: var(--error-text);
 }
 
 .passwordMisMatch {
   width: 100%;
-  background: linear-gradient(135deg, #ff4d4d, #ff6b6b);
-  color: #fff;
+  background: var(--gradient-error);
+  color: var(--text-on-accent);
   border-radius: 10px;
   margin-top: 10px;
   padding: 0.6rem 1rem;
@@ -93,21 +98,21 @@
 .button {
   margin-top: 0.5rem;
   padding: 0.9rem;
-  background: linear-gradient(135deg, #e04bb1, #ec6df1);
-  color: #fff;
+  background: var(--gradient-secondary);
+  color: var(--text-on-accent, #fff);
   border: none;
   border-radius: 12px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 16px rgba(224, 75, 177, 0.3);
+  box-shadow: var(--shadow-primary);
 }
 
 .button:hover {
-  background: linear-gradient(135deg, #ec6df1, #e04bb1);
+  background: var(--gradient-secondary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(236, 109, 241, 0.45);
+  box-shadow: var(--shadow-primary-hover);
 }
 
 /* ====== Error Message (Floating) ====== */
@@ -121,34 +126,35 @@
   align-items: center;
   width: 320px;
   padding: 1rem;
-  background: rgba(255, 0, 0, 0.75);
-  color: #fff;
+  background: var(--error-bg);
+  color: var(--text-on-accent);
   border-radius: 12px;
   font-weight: 600;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-primary);
   animation: fadeInDown 0.8s ease-out;
 }
+
 /* ===== File Upload Box ===== */
 .uploadBox {
   min-width: 300px;
-  border: 2px dashed #e04bb1;
+  border: 2px dashed var(--accent-border);
   border-radius: 12px;
   padding: 1.5rem;
   text-align: center;
-  color: #fff;
-  background: rgba(43, 43, 60, 0.7);
+  color: var(--text-primary);
+  background: var(--glass-bg-light);
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .uploadBox:hover {
-  border-color: #ec6df1;
-  background: rgba(43, 43, 60, 0.9);
+  border-color: var(--accent-color);
+  background: var(--glass-bg-strong);
 }
 
 .dragActive {
-  border-color: #00d084;
-  background: rgba(0, 208, 132, 0.15);
+  border-color: var(--success-color);
+  background: var(--success-bg);
 }
 
 .uploadLabel {
@@ -156,31 +162,27 @@
   flex-direction: column;
   gap: 0.5rem;
   font-weight: 600;
-  color: #ec6df1;
+  color: var(--accent-color);
   cursor: pointer;
 }
 
 .hiddenInput {
-
   position: absolute;
-  inset: 0;           /* cover the whole parent */
-  opacity: 0;         /* fully invisible */
-  cursor: pointer;    /* shows pointer when hovering */
-
-  
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
 }
 
 .uploadText {
   font-size: 0.9rem;
-  color: #ccc;
+  color: var(--text-muted);
   margin-top: 0.5rem;
 }
 
 .successFile {
-  color: #00d084;
+  color: var(--success-color);
   font-weight: 600;
 }
-
 
 @keyframes fadeInDown {
   from {

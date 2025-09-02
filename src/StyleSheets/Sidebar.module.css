@@ -1,21 +1,20 @@
-/* Sidebar Container */
+/* ===== Sidebar Container ===== */
 .sidebarContainer {
   width: 220px;
   min-width: 210px;
   min-height: 100vh;
- background: linear-gradient(135deg, #172441, #1e293b);
+  background: var(--gradient-surface);
   -webkit-backdrop-filter: blur(12px);
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-
+  backdrop-filter: blur(12px);
+  border-right: 1px solid var(--glass-border);
   padding: 20px 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35); */
-  transition: width 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out, background 0.3s ease-in-out;
 }
 
-/* Sidebar Inner */
+/* ===== Sidebar Inner ===== */
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -23,21 +22,21 @@
   width: 100%;
 }
 
-/* Title */
+/* ===== Title ===== */
 .title {
   font-size: 1.5rem;
   font-weight: 700;
-    background: linear-gradient(160deg, #38bdf8, #6366f1, #ec4899);
+  background: var(--gradient-brand);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
   margin-bottom: 25px;
   letter-spacing: 0.5px;
-  text-shadow: 0 2px 8px rgba(229, 68, 213, 0.4);
+  text-shadow: 0 2px 8px var(--shadow-brand);
   animation: fadeInDown 0.6s ease;
 }
 
-/* Sidebar Content */
+/* ===== Sidebar Content ===== */
 .sideBarContent {
   width: 100%;
   margin-top: 10px;
@@ -46,7 +45,7 @@
   gap: 8px;
 }
 
-/* Nav List */
+/* ===== Nav List ===== */
 .list {
   list-style: none;
   width: 100%;
@@ -56,7 +55,7 @@
   padding: 0;
 }
 
-/* Nav Links */
+/* ===== Nav Links ===== */
 .linkclass {
   width: 100%;
   height: 48px;
@@ -67,8 +66,8 @@
   padding: 0 18px;
   font-size: 1rem;
   font-weight: 500;
-  color: #cfcfcf;
-  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-muted);
+  background: var(--glass-bg);
   border: 1px solid transparent;
   cursor: pointer;
   transition: all 0.25s ease;
@@ -85,9 +84,9 @@
 
 /* Hover state */
 .linkclass:hover {
-  background: rgba(229, 68, 213, 0.12);
-  color: #e544d5;
-  border-color: rgba(229, 68, 213, 0.4);
+  background: var(--glass-bg-hover);
+  color: var(--accent-color);
+  border-color: var(--glass-border-hover);
   transform: translateX(4px);
 }
 
@@ -97,71 +96,74 @@
 
 /* Active link */
 .activeLink {
-  background: linear-gradient(90deg, #e544d5, #ff6ec7);
-  color: #fff !important;
+  background: var(--gradient-accent);
+  color: var(--text-on-accent) !important;
   font-weight: 600;
-  box-shadow: 0 4px 18px rgba(229, 68, 213, 0.45);
+  box-shadow: 0 4px 18px var(--shadow-accent);
   border: none;
 }
 
-/* Add a glowing border animation to active link */
 .activeLink::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: 14px;
   padding: 2px;
-  background: linear-gradient(90deg, #e544d5, #ff6ec7, #e544d5);
+  background: var(--gradient-accent);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
-          mask-composite: exclude;
+  mask-composite: exclude;
   animation: borderGlow 3s linear infinite;
 }
 
-/* Footer Section */
+/* ===== Footer Section ===== */
 .sidebarFooter {
   margin-top: auto;
   padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--glass-border);
   display: flex;
   flex-direction: column;
   gap: 12px;
   animation: fadeInUp 0.6s ease;
 }
 
-/* Hamburger menu for mobile */
+/* ===== Hamburger (Mobile) ===== */
 .hamburger {
   display: none;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  width: 45px;
-  height: 45px;
+  padding: 0px 4px;
+  width: 35px;
+  height: 35px;
   cursor: pointer;
   position: absolute;
   top: 10px;
   left: 20px;
-  background: rgba(229, 68, 213, 0.15);
-  border-radius: 50%;
+  background: var(--accent-bg);
+  border-radius: 10px;
   backdrop-filter: blur(6px);
   transition: all 0.3s ease;
   z-index: 10;
 }
 
 .hamburger:hover {
-  background: rgba(229, 68, 213, 0.3);
+  background: var(--accent-bg-hover);
 }
 
 .bar {
-  width: 28px;
-  height: 3px;
-  background-color: #e544d5;
-  margin: 4px 0;
+  width: 25px;
+  height: 2px;
+  background-color: var(--accent-color);
+  margin: 3px 0;
   border-radius: 2px;
   transition: 0.4s;
 }
+.bar:nth-child(2) {
+  width: 15px;
+  align-self: flex-start;
+}
 
-/* Animations */
+/* ===== Animations ===== */
 @keyframes fadeInDown {
   from { opacity: 0; transform: translateY(-20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -177,7 +179,7 @@
   100% { background-position: 200% 50%; }
 }
 
-/* Responsive */
+/* ===== Responsive ===== */
 @media screen and (max-width: 950px) {
   .sidebarContainer {
     display: none;
@@ -185,40 +187,37 @@
   .hamburger {
     display: flex;
   }
-  .mobileSidebar{
+  .mobileSidebar {
     display: flex;
     position: fixed;
     width: 100%;
     z-index: 1000;
-      background: transparent;
-  backdrop-filter: blur(15px);
-  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.4);
-  padding: 0px;
-
+    background: transparent;
+    backdrop-filter: blur(15px);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.4);
+    padding: 0px;
   }
   .sidebar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 30%;
-  min-width: 200px;
-  padding:10px ;
-  background: linear-gradient(145deg, #0f172a, #1e293b);
-  height: 100vh;
-}
-.closeBtn {
- position: absolute;
- left: 90%;
-  font-size: 1.8rem;
-  color: #e544d5;
-  cursor: pointer;
-  width:20%;
- 
-  transition: transform 1s ease, color 0.2s ease;
-}
-
-.closeBtn:hover {
-   transform: scale(1.2);
-  color: #ff6ec7;
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    min-width: 200px;
+    padding: 10px;
+    background: var(--gradient-surface);
+    height: 100vh;
+  }
+  .closeBtn {
+    position: absolute;
+    left: 90%;
+    font-size: 1.8rem;
+    color: var(--accent-color);
+    cursor: pointer;
+    width: 20%;
+    transition: transform 1s ease, color 0.2s ease;
+  }
+  .closeBtn:hover {
+    transform: scale(1.2);
+    color: var(--accent-hover);
+  }
 }

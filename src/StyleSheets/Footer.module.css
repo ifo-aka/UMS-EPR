@@ -1,15 +1,14 @@
+/* ===== Footer ===== */
 .footer {
   width: 100%;
- /* deep subtle background */
- background: linear-gradient(135deg, #0f172a, #1e293b);
-  color: #ccc;
+  background: var(--gradient-bg-primary);
+  color: var(--text-secondary);
   font-size: 0.9rem;
   padding: 20px 0;
-  /* padding-top:0px ; */
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border-radius: 12px 12px 0 0; */
+  /* box-shadow: 0 -4px 14px var(--shadow-accent);  */
 }
 
 .footerContainer {
@@ -20,9 +19,11 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 20px;
+  border-top: 1px solid var(--glass-border); 
+  padding-top: 10px;
 }
 
-/* Left Section */
+/* ===== Left Section ===== */
 .left {
   display: flex;
   align-items: center;
@@ -39,15 +40,15 @@
 .brandName {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #f0f0f0;
+  color: var(--text-primary); /* ✅ stands out */
 }
 
 .tagline {
   font-size: 0.8rem;
-  color: #888;
+  color: var(--text-muted); /* ✅ better contrast */
 }
 
-/* Center Section */
+/* ===== Center Section ===== */
 .center {
   flex: 1;
   display: flex;
@@ -58,18 +59,18 @@
 }
 
 .link {
-  color: #aaa;
+  color: var(--text-primary);
   text-decoration: none;
   transition: all 0.2s ease;
   font-size: 0.9rem;
 }
 
 .link:hover {
-  color: #fff;
+  color: var(--accent-hover); /* ✅ juicy pop on hover */
   text-decoration: underline;
 }
 
-/* Right Section */
+/* ===== Right Section ===== */
 .right {
   flex: 1;
   text-align: right;
@@ -78,10 +79,10 @@
 
 .versionText {
   font-size: 0.8rem;
-  color: #999;
+  color: var(--text-secondary);
 }
 
-/* Responsive */
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
   .footerContainer {
     flex-direction: column;

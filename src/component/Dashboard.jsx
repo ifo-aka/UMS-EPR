@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { UserIcon, SearchIcon, EditIcon, DeleteIcon } from "../store/icons";
 import useDebounce from "../store/UseDebounce";
 
+
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchStudentsThunk,
@@ -14,7 +15,7 @@ import {
   clearSearchResults,
   setRecentStudents,
 } from "../store/slices/studentSlice"; // ensure this path is correct
-import Container from "./Container";
+
 
 let Dashboard = () => {
   const dispatch = useDispatch();
@@ -149,7 +150,7 @@ let Dashboard = () => {
   };
 
   return (
-    <Container>
+    
       <div className={styles.dashboard}>
         <div className={styles.herocont}>
           <div className={styles.Usericon}>
@@ -296,7 +297,7 @@ let Dashboard = () => {
           )}
         </>
       </div>
-    </Container>
+    
   );
 };
 

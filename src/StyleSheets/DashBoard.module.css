@@ -1,15 +1,12 @@
-/* ========== CONTAINER & DASHBOARD ========== */
-
-
 .dashboard {
   width: 100%;
   max-width: 100%;
-  /* margin: 0 auto; */
-  /* height: 100vh; */
+  margin-top: 15px;
+  height: 1000px;
   padding: 1rem;
-  background: rgba(30, 30, 47, 0.85);
+  background: var(--bg-primary);
   border-radius: 0px;
-  box-shadow: 0 8px 30px rgba(192, 57, 133, 0.15);
+  box-shadow: 0 8px 30px rgba(196, 99, 154, 0.327);
   backdrop-filter: blur(12px);
   animation: fadeIn 0.6s ease;
 }
@@ -32,7 +29,7 @@
 .headingTop {
   font-size: 1.8rem;
   font-weight: 700;
-  background: linear-gradient(90deg, #ff6ec7, #e661ad);
+  background: var(--gradient-info);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0;
@@ -53,9 +50,9 @@
   display: flex;
   align-items: center;
   border-radius: 8px;
-  border: 1px solid #e661ad;
-  background: #23234a;
-  color: #fff;
+  border: 1px solid var(--accent-hot);
+  background: var(--bg-overlay);
+  color: var(--text-primary);
   max-width: 350px;
   width: 100%;
   overflow: hidden;
@@ -67,13 +64,13 @@
   padding: 0.6rem 1rem;
   background: transparent;
   border: none;
-  color: #fff;
+  color: var(--text-primary);
   font-size: 1rem;
   outline: none;
 }
 
 .search::placeholder {
-  color: #aaa;
+  color: var(--text-dim);
 }
 
 .btns {
@@ -104,29 +101,31 @@
 .recentBtn,
 .allBtn,
 .addStudentbtn {
-  background: linear-gradient(90deg, #e661ad, #ff6ec7);
-  color: #fff;
+  background: var(--gradient-accent-vivid);
+  color: var(--text-primary);
 }
 
 .recentBtn:hover,
 .allBtn:hover,
 .addStudentbtn:hover {
-  background: #15171c;
-  border: 2px solid #ec6df1;
-  color: #ec6df1;
+  background: var(--bg-dark);
+  border: 2px solid var(--accent-alt);
+  color: var(--accent-alt);
   box-shadow: 0 6px 18px rgba(229, 68, 213, 0.35);
 }
 
 .filterSelect,
 .filterBtn {
-  background: #262652;
-  color: #fff;
+  background: var(--bg-tertiary);
+  box-shadow: var(--shadow-primary);
+  color: var(--text-primary);
 }
 
 .filterBtn:hover,
 .filterSelect:hover {
-  background: #313161;
-  border: 1px solid #e661ad;
+  background: var(--bg-secondary);
+  border: 1px solid var(--accent-hot);
+    box-shadow: var(--shadow-secondary);
 }
 
 /* ========== STATS CARDS ========== */
@@ -142,18 +141,18 @@
 }
 
 .totalStudent {
-  background: linear-gradient(135deg, #db38b5, #e661ad);
-  color: #fff;
+  background: var(--gradient-accent);
+  color: var(--text-primary);
 }
 
 .totalPages {
-  background: linear-gradient(135deg, #573152, #2c1e3d);
-  color: #fff;
+  background: var(--gradient-accent-reverse); /* custom dark gradient */
+  color: var(--text-primary);
 }
 
 .totalDepartments {
-  background: #1e1e2f;
-  color: #db38b5;
+  background: var(--bg-tertiary);
+  color: var(--accent);
 }
 
 .totalStudent:hover,
@@ -175,21 +174,23 @@
   font-size: 1.1rem;
   opacity: 0.9;
 }
+
 .totalDepartmentsLabel {
-    background: rgba(236, 109, 241, 0.1);
+  background: rgba(236, 109, 241, 0.1);
   padding: 0.4rem 0.8rem;
   border-radius: 999px;
   font-weight: 600;
-  color: #ec6df1;
+  color: var(--accent-alt);
 }
+
 /* ========== TABLE ========== */
 .tableContainer {
   width: 100%;
-  height: 45vh;
+  height: 55vh;
   overflow: auto;
   padding: 12px;
   border-radius: 12px;
-  background: rgba(30, 30, 47, 0.4);
+  background: var(--bg-secondary);
   backdrop-filter: blur(8px);
   box-shadow: inset 0 0 8px rgba(192, 57, 133, 0.1);
 }
@@ -198,27 +199,28 @@
   width: 8px;
 }
 .tableContainer::-webkit-scrollbar-thumb {
-  background: linear-gradient(#e661ad, #db38b5);
+  background: var(--gradient-accent-hot);
   border-radius: 10px;
 }
 .tableContainer::-webkit-scrollbar-track {
-  background: #23234a;
+  background: var(--bg-overlay);
   border-radius: 10px;
 }
 
 .studentsTable {
-  width: 100%;
+  width: 95%;
   border-collapse: collapse;
-  background: #1e1e2f;
+  background: var(--bg-tertiary);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 0px 12px rgba(200, 171, 188, 0.2);
 }
 
 .studentsTable th {
-  background: linear-gradient(90deg, #db38b5, #e661ad);
-  color: #fff;
+  background: var(--gradient-accent-vivid);
+  color: var(--text-primary);
   font-weight: bold;
+  font-size: calc(1vw + .3rem);
   padding: 1rem;
   text-align: left;
   letter-spacing: 0.5px;
@@ -230,17 +232,17 @@
 }
 
 .studentsTable tr:nth-child(even) {
-  background: #23234a;
+  background: var(--bg-overlay);
 }
 
 .studentsTable tr:hover {
-  background: #f57ba4;
-  color: #1e1e2f;
+  background: var(--accent-hover-bg);
+  color: var(--bg-tertiary);
   transition: all 0.2s ease;
 }
 
 .noDataCell {
-  color: #aaa;
+  color: var(--text-dim);
   text-align: center;
   padding: 1rem;
 }
@@ -256,18 +258,18 @@
 .paginationControls button {
   padding: 0.5rem 1.2rem;
   border-radius: 8px;
-  background: #1e1e2f;
-  color: rgb(192, 57, 133);
+  background: var(--bg-tertiary);
+  color: var(--accent);
   cursor: pointer;
   font-size: 1rem;
   font-weight: bold;
-  border: 2px solid rgb(192, 57, 133);
+  border: 2px solid var(--accent);
   transition: all 0.25s ease;
 }
 
 .paginationControls button:hover:not(:disabled) {
-  background: linear-gradient(90deg, #e661ad, #db38b5);
-  color: #fff;
+  background: var(--gradient-accent-hot);
+  color: var(--text-primary);
 }
 
 .paginationControls button:disabled {
@@ -279,7 +281,7 @@
 
 /* ========== UTILS ========== */
 .roleIndicator {
-  color: #fff;
+  color: var(--text-primary);
   font-size: 1rem;
 }
 
@@ -293,14 +295,14 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: #e661ad;
+  color: var(--accent-hot);
   font-size: 1.1rem;
   transition: transform 0.2s;
 }
 
 .actionBtn:hover {
   transform: scale(1.2);
-  color: #ff6ec7;
+  color: var(--accent-vivid);
 }
 
 /* Animations */

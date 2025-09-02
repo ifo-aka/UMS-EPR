@@ -1,25 +1,18 @@
-.container{
-    min-height: 100%;
-max-height: max-content;
-   
+.container {
+  min-height: 1200px;
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary); /* was green/test before */
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    min-height: 1000px;
+    max-height: max-content;
     width: 100%;
     display: flex;
-    
-   
-    /* margin-bottom: 10px;s */
-    display: flex;
-    flex-direction: column;
-    /* background-color: green; */
-
-}
-@media screen  and (max-width : 768px){
-    .container{
- min-height: 80vh;
-        max-height: max-content;
-        width: 100%;
-        display: flex;
-        
-
-    }
-    
+    background: var(--bg-secondary); /* fallback for smaller screens */
+  }
 }

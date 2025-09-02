@@ -1,70 +1,74 @@
+/* ===== Login Container ===== */
 .loginContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 500px;
-    width: 100%;
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    height: 100vh;
-    
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+  width: 100%;
+  background: var(--gradient-bg-primary); /* unified bg gradient */
+  height: 100vh;
 }
 
+/* ===== Login Form ===== */
 .loginForm {
-   height: max-content;
+  margin-top: 100px;
   width: 90%;
   max-width: 480px;
   min-width: 320px;
   padding: 2rem;
   border-radius: 16px;
-  background: rgba(43, 43, 60, 0.9);
+  background: var(--glass-bg);
   backdrop-filter: blur(10px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 24px var(--shadow-primary);
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-
+/* ===== Title ===== */
 .loginTitle {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 0.5rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-primary); /* switched from inverse */
+  margin-bottom: 0.5rem;
 }
 
+/* ===== Input ===== */
 .loginInput {
-    padding: 0.75rem 1rem;
-   margin: 15px 0px;;
-    border-radius: 5px;
-    font-size: 1rem;
-    outline: none;
-    border: none;
-    border-bottom:2px solid rgb(218, 69, 173) ;
-    transition: border-color 0.2s;
-    background-color:  #1E1E2F;
-    
+  padding: 0.75rem 1rem;
+  margin: 15px 0px;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid var(--accent-hr);
+  transition: border-color 0.2s;
+  background-color: var(--glass-bg); /* softer in light mode */
+  color: var(--text-primary);
 }
 
 .loginInput:focus {
-    border-color: rgb(183, 39, 157) ;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 6px var(--shadow-accent);
 }
 
+/* ===== Button ===== */
 .loginButton {
-    padding: 0.75rem 1rem;
-    background: rgb(192, 57, 133);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s;
+  padding: 0.75rem 1rem;
+  background: var(--gradient-secondary);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
 }
 
 .loginButton:hover {
-    background: rgb(0, 0, 0);
-    border: 2px solid rgb(192, 57, 133);
-    color: rgb(192, 57, 133);
+  background: var(--gradient-secondary-hover);
+  border: 2px solid transparent;
+  transform: translateY(-2px) scale(1.02);
 }

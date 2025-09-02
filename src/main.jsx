@@ -18,7 +18,7 @@ import App from './App.jsx';
 // Pages
 import Home from './component/Home.jsx';
 import Login from './component/Login.jsx';
-import Dashboard from './component/Dashboard.jsx';
+
 import SignUp from './component/SiginUp.jsx';
 import AddStudentFrom from './component/AddStudentFrom.jsx';
 import StudentDetailPage from './component/StudentDetailPage.jsx';
@@ -28,6 +28,8 @@ import About from './pages/About.jsx';
 
 // Auth
 import ProtectedRoutes from './component/ProtectedRoutes.jsx';
+import DashBoardPage from './pages/Dashboard.jsx';
+import HomePage from './pages/Home.jsx';
 
 function AppRoutes() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -37,7 +39,7 @@ function AppRoutes() {
       path: '/',
       element: <App />, // Layout with Sidebar + Header + Outlet
       children: [
-        { index: true, element: <Home /> }, // this is "/"
+        { index: true, element: <HomePage /> }, // this is "/"
         
         { path: 'login', element: <Login /> },
     { path: 'signup', element: <SignUp /> },
@@ -52,7 +54,7 @@ function AppRoutes() {
           path: 'dashboard',
           element: (
             <ProtectedRoutes isAuthenticated={isAuthenticated}>
-              <Dashboard />
+              <DashBoardPage />
             </ProtectedRoutes>
           ),
         },

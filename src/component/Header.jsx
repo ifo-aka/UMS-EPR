@@ -2,17 +2,29 @@ import styles from "../StyleSheets/Header.module.css";
 import { AppContext } from "../store/AppContext";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import ThemeToggle from "./ThemeToggle";
 
 // ✅ Import Heroicons (you can swap with fa, md, etc. if you like another style)
 import { HiHome, HiInformationCircle, HiDocumentText, HiLogin, HiUserAdd, HiLogout, HiUser } from "react-icons/hi";
+import {logout} from "../store/slices/authSlice"
+
+import { useSelector,useDispatch } from "react-redux";
+
+
 
 const Header = () => {
-  const { isAuthenticated, logout, isMobileDimention } = useContext(AppContext);
+  const dispatch = useDispatch();
+
+  const {isAuthenticated} = useSelector((s)=>s.auth)
+  const {isMobileDimention} = useSelector((s)=>s.ui)
+
+  console.log(isMobileDimention)
 
   return (
     <div className={styles.header}>
       <div className={styles.HeadingCont}>
         <h1 className={styles.logo}>Logo</h1>
+        <ThemeToggle />
     
       </div>
 
@@ -27,7 +39,7 @@ const Header = () => {
           <Link to="/profile">
             <li className={styles.li}>
                  <div className={styles.profile}>
-         {isMobileDimention ? <HiUser size={24} color={"rgba(239, 232, 236, 1)"} /> : "Profile" }
+         {isMobileDimention ? <HiUser size={24}  /> : "Profile" }
         </div>
             </li>
           </Link>
@@ -52,7 +64,7 @@ const Header = () => {
               </Link>
             </>
           ) : (
-            <button onClick={logout} className={styles.li}>
+            <button onClick={()=>dispatch(logout())} className={styles.li}>
               {isMobileDimention ? <HiLogout size={20} /> : "Logout"}
             </button>
           )}

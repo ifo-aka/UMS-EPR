@@ -1,0 +1,18 @@
+.box{
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 3 ;
+    background-color: var(--glass-bg);
+    border: 2px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.box:hover{
+    background-color: var(--glass-bg-hover);
+    border: 2px solid var(--glass-border-hover);
+
+} 
+.icon{
+    color: var(--accent-color);
+}
