@@ -73,9 +73,9 @@
   --gradient-info: linear-gradient(90deg, #1bf0ec 10%, #24fbfb 50%, #2dd4bf 10%);
 
   /* === Shadows === */
-  --shadow-primary: rgba(159, 239, 0, 0.35);
+  --shadow-primary: rgba(25, 240, 244, 0.35);
   --shadow-primary-hover: rgba(54, 249, 246, 0.45);
-  --shadow-brand: rgba(159, 239, 0, 0.4);
+  --shadow-brand: rgba(33, 190, 248, 0.751);
   --shadow-accent: rgba(54, 249, 246, 0.5);
 
   /* === Glass Effect === */
@@ -167,12 +167,12 @@
 /* ================== Scrollbar ================== */
 :root::-webkit-scrollbar {
   width: 10px;
-  background-color: rgba(239, 239, 239, 0.2);
+  background-color: rgba(123, 196, 199, 0.2);
 }
 :root::-webkit-scrollbar-thumb {
-  background: rgba(159, 239, 0, 0.2);
+  background: rgba(21, 227, 234, 0.751);
   border-radius: 6px;
 }
 :root::-webkit-scrollbar-track {
-  background: #0a0f14;
+  background: #101d29;
 }

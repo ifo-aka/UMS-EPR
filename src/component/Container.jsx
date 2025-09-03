@@ -11,12 +11,13 @@ console.log(showSpinner)
       ) : (
         <div className={styles.container}>
           <div
-            className="spinner-border"
+            className={`spinner-border ${styles.spinner}`}
             style={{
               width: "4rem",
               height: "4rem",
               position: "absolute",
               top: "50%",
+              
              
             }}
             role="status"

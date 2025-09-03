@@ -18,7 +18,7 @@ export const  UserIcon = ({color}) => (
 );
 
  export const SearchIcon = () => (
-  <svg width="18" height="18" fill="#e661ad" viewBox="0 0 24 24">
+  <svg width="18" height="18" fill="#14c3c0af" viewBox="0 0 24 24">
     <path d="M21 20l-5.197-5.197A7.92 7.92 0 0 0 17 10a8 8 0 1 0-8 8c1.61 0 3.09-.49 4.303-1.324L20 21zM10 16a6 6 0 1 1 0-12 6 6 0 0 1 0 12z" />
   </svg>
 );

@@ -40,13 +40,13 @@ const Login = () => {
         .then((res) => {
           console.log(res.payload);
           if(!res.payload.success){
-
-             setError(res.payload.error)
+            if(res.payload.error == "Failed to fetch");
+             setError(res.payload.error+ ".Please check you network connection and try agian.")
              dispatch(setShowSpinner(false))
         
          setTimeout(() => {
             setError("")
-         }, 2000);
+         }, 3000);
           }
       })
       .finally(

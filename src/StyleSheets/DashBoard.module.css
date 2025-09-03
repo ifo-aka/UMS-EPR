@@ -121,7 +121,7 @@
   color: var(--text-primary);
 }
 
-.filterBtn:hover,
+
 .filterSelect:hover {
   background: var(--bg-secondary);
   border: 1px solid var(--accent-hot);

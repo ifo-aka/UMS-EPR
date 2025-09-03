@@ -22,7 +22,7 @@ import Login from './component/Login.jsx';
 import SignUp from './component/SiginUp.jsx';
 import AddStudentFrom from './component/AddStudentFrom.jsx';
 import StudentDetailPage from './component/StudentDetailPage.jsx';
-import FileUpload from './component/FileUpload.jsx';
+import FileUploadPage from './pages/FileUpload.jsx';
 import NotFound from './pages/NotFound.jsx';
 import About from './pages/About.jsx';
 
@@ -59,7 +59,7 @@ function AppRoutes() {
           ),
         },
         { path: 'studentDetail', element: <StudentDetailPage /> },
-        { path: 'fileUpload', element: <FileUpload /> },
+        { path: 'fileUpload', element: <FileUploadPage /> },
       ],
     },
 

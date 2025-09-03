@@ -28,13 +28,13 @@
 .profile {
   height: 42px;
   width: 42px;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.9rem;
   font-weight: bold;
-  box-shadow: 0 4px 10px var(--shadow-accent); /* ✅ theme var */
+  /* box-shadow: 0 4px 10px var(--shadow-accent); ✅ theme var */
   cursor: pointer;
   transition: transform 0.2s;
 }

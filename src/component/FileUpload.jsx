@@ -135,11 +135,12 @@ const MultiFileUpload = () => {
 
   return (
     <>
-    <Container>
-      <form className={styles.container} onSubmit={handleSubmit}>
+      <div className={styles.fileuploadcontainer}>
+      <form className={styles.fileUploadForm} onSubmit={handleSubmit}>
         <h2 style={{ textAlign: "center", color: "#fff", marginBottom: "1rem" }}>
           Upload Required Documents
         </h2>
+        <div style={{"display":"flex"}}>
         {renderUploadBox("Upload Domicile", "domicile", files.domicile)}
         {renderUploadBox("Upload Matric Certificate", "matric", files.matric)}
         {renderUploadBox(
@@ -147,12 +148,15 @@ const MultiFileUpload = () => {
           "intermediate",
           files.intermediate
         )}
+        </div>
+        <div>
         <button type="submit" className={styles.button}>
           Submit
         </button>
+        </div>
       </form>
 
-    </Container>
+  </div>
     
       {messages.length > 0 && (
         <div

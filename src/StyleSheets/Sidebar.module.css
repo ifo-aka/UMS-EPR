@@ -2,7 +2,7 @@
 .sidebarContainer {
   width: 220px;
   min-width: 210px;
-  min-height: 100vh;
+  min-height: 1200px;
   background: var(--gradient-surface);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
@@ -85,7 +85,7 @@
 /* Hover state */
 .linkclass:hover {
   background: var(--glass-bg-hover);
-  color: var(--accent-color);
+  color: var(--text-primary);
   border-color: var(--glass-border-hover);
   transform: translateX(4px);
 }
@@ -102,7 +102,9 @@
   box-shadow: 0 4px 18px var(--shadow-accent);
   border: none;
 }
-
+.activeLink:hover{
+  color: var(--text-primary)!important;
+}
 .activeLink::before {
   content: "";
   position: absolute;

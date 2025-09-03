@@ -58,8 +58,7 @@ const Home = () => {
     if (roleContent[role.toUpperCase()]) {
       const rolekey = role.toUpperCase();
       return (
-        
-        <section className={styles.roleSection} >
+        <>        <section className={styles.roleSection} >
           <h2 className={styles.title}>{roleContent[rolekey].title}</h2><hr className={styles.hr}/>
           <ul className={styles.cardContainer}>
             {roleContent[rolekey].items.map((item, idx) => (
@@ -67,6 +66,17 @@ const Home = () => {
             ))}
           </ul> 
         </section>
+                 <section className={styles.announcementSection}>
+          <hr className={styles.hr} />
+          <h2 className={styles.featuresTitle}>📢 Latest Announcements</h2>
+          <ul className={styles.announcementCardContainer}>
+            <li className={styles.announcementCard}>🗓️ Midterm exams start from 10th Sept</li>
+            <li className={styles.announcementCard}>📚 Library timings updated: 8AM - 8PM</li>
+            <li className={styles.announcementCard}>⚡ New feature: Online attendance tracking</li>
+          </ul>
+        </section>
+        </>
+
       );
     }
 
@@ -96,15 +106,7 @@ const Home = () => {
   <>
       {renderRoleBasedHome()}
 
-            <section className={styles.announcementSection}>
-          <hr className={styles.hr} />
-          <h2 className={styles.featuresTitle}>📢 Latest Announcements</h2>
-          <ul className={styles.announcementCardContainer}>
-            <li className={styles.announcementCard}>🗓️ Midterm exams start from 10th Sept</li>
-            <li className={styles.announcementCard}>📚 Library timings updated: 8AM - 8PM</li>
-            <li className={styles.announcementCard}>⚡ New feature: Online attendance tracking</li>
-          </ul>
-        </section>
+   
 
       <section className={styles.featureCard}>
         <hr/>
