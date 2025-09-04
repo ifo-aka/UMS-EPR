@@ -13,7 +13,7 @@ const Footer = () => {
         {/* Left Section - Branding */}
         <div className={styles.left}>
           <img
-            src="/src/assets/spring-logo.png"
+            src="./spring.png"
             alt="Spring Logo"
             className={styles.logo}
           />
