@@ -42,7 +42,7 @@
   --accent-fuchsia: #36f9f6;
   --accent-vivid: #2dd4bf;
   --accent-deep: #00c853;
-  --accent-color: #9fef00;
+  --accent-color: #1abdc9;
   --accent-hover: #b6ff33;
   --accent-hr: #00ff85;
 
@@ -170,7 +170,7 @@
   background-color: rgba(123, 196, 199, 0.2);
 }
 :root::-webkit-scrollbar-thumb {
-  background: rgba(21, 227, 234, 0.751);
+  background: var(--gradient-accent-vivid);
   border-radius: 6px;
 }
 :root::-webkit-scrollbar-track {
