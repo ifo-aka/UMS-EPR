@@ -13,17 +13,18 @@
 
 /* ====== Form Card ====== */
 .form {
-  height: max-content;
+  
   width: 90%;
   max-width: 480px;
   min-width: 320px;
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 16px;
   background: var(--bg-primay);
   backdrop-filter: blur(10px);
   box-shadow:0 8px 24px  var(--shadow-primary);
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   gap: 1.25rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -79,7 +80,7 @@
 .passwordMisMatch {
   width: 100%;
   background: var(--gradient-error);
-  color: var(--text-on-accent);
+  color: var(--error);
   border-radius: 10px;
   margin-top: 10px;
   padding: 0.6rem 1rem;
@@ -107,6 +108,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: var(--shadow-primary);
+  min-width: 200px;
 }
 
 .button:hover {
@@ -136,35 +138,63 @@
 .fileuploadcontainer{
   width: 100%;
   display: flex;
-  background-color: aqua;
+  /* background-color: aqua;s */
   align-items: center;
   justify-content: center;
+  height: auto;
+  padding: 1rem;
+  flex-direction: column;
+  gap: 2rem;
 
 }
 .fileUploadForm{
-  background-color: blue;
+  /* background-color: blue; */
   width: 90%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  gap: 1rem;
+
+
 
 }
-
+.fileUploadForm h2{
+  color: var(--text);
+  /* color: red; */
+}
+.uploadBoxContainer{
+  /* background-color: aquamarine; */
+  gap: 1rem;
+  padding: 10px;
+  height: max-content;
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
 /* ===== File Upload Box ===== */
 .uploadBox {
   min-width: 300px;
-  border: 2px dashed var(--accent-border);
+  max-width: 300px;
+  border: 2px dashed var(--accent-fuchsia);
   border-radius: 12px;
   padding: 1.5rem;
   text-align: center;
   color: var(--text-primary);
-  background: var(--glass-bg-light);
+  background: var(--glass-bg);
   transition: all 0.3s ease;
   cursor: pointer;
+  gap: 1rem;
+  max-height: 200px;
+  overflow: hidden;
+
 }
 
 .uploadBox:hover {
-  border-color: var(--accent-color);
-  background: var(--glass-bg-strong);
+  border-color: var(--accent);
+  background: var(--glass-bg);
 }
 
 .dragActive {

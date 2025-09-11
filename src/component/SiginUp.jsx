@@ -3,6 +3,7 @@ import styles from "../StyleSheets/SignUp.module.css";
 import { useRef } from "react";
 import { Form,useNavigate } from "react-router-dom";
 import Container from "./Container";
+import InfoUtility from "../store/InfoUtility";
 const SignUp = () => {
   let [showErrorMessage, setShowErrorMessage] = useState(false);
   let [bothSame, setBothSame] = useState(null);
@@ -158,10 +159,7 @@ useEffect(() => {
         </button>
       </Form>
       {showErrorMessage && (
-        <div className={styles.errorMsg}>
-          <h3>{handleErrorHeading}</h3>
-          <p>{handleErrorMessage}</p>
-        </div>
+        <InfoUtility info={{message:`${handleErrorMessage}`,heading: handleErrorHeading,bgColor :"red"}} />
       )}
     </Container>
   );

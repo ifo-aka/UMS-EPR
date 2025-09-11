@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "../StyleSheets/SignUp.module.css";
 import { useDispatch } from "react-redux";
 import { setShowSpinner } from "../store/slices/authSlice";
 import Container from "./Container";
+import InfoUtility from "../store/InfoUtility";
+
 
 const MultiFileUpload = () => {
   const dispatch = useDispatch();
+  const eventSourceRef = useRef(null);
 
   const [files, setFiles] = useState({
     domicile: null,
@@ -15,6 +18,7 @@ const MultiFileUpload = () => {
 
   const [messages, setMessages] = useState([]);
   const [dragging, setDragging] = useState(null);
+  const [infoMessage, setInfoMessage] = useState(null);
 
   const handleFileSelect = (file, type) => {
     if (file) {
@@ -72,8 +76,8 @@ const MultiFileUpload = () => {
                 src={URL.createObjectURL(file)}
                 alt="preview"
                 style={{
-                  marginTop: "10px",
-                  maxWidth: "120px",
+                  marginTop: "5px",
+                  maxWidth: "60px",
                   borderRadius: "8px",
                   border: "1px solid #444",
                   boxShadow: "0 4px 10px rgba(0,0,0,0.25)",
@@ -95,7 +99,12 @@ const MultiFileUpload = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!files.domicile || !files.matric || !files.intermediate) {
-      alert("⚠️ Please upload all required documents before submitting.");
+      setInfoMessage({
+        bgColor: "red",
+        textColor: "white",
+        message: "⚠️ Please upload all documents",
+      });
+      setTimeout(() => setInfoMessage(null), 2000);
       return;
     }
 
@@ -105,13 +114,7 @@ const MultiFileUpload = () => {
     fd.append("inter", files.intermediate);
 
     dispatch(setShowSpinner(true));
-    setMessages([]); // reset old msgs
-
-    // ⏳ Show messages progressively WHILE waiting
-    addMessage("⏳ Uploading your documents...");
-    setTimeout(() => addMessage("📂 Preparing files for parsing..."), 1000);
-    setTimeout(() => addMessage("🔍 Parsing files on server..."), 2000);
-    setTimeout(() => addMessage("🧠 Analyzing content..."), 3000);
+    setMessages([]);
 
     try {
       const res = await fetch("http://localhost:8080/auth/api/submitdocs", {
@@ -119,58 +122,120 @@ const MultiFileUpload = () => {
         body: fd,
       });
 
-      const data = await res.json();
-      console.log(data);
+      if (!res.ok) {
+        setInfoMessage({
+          bgColor: "red",
+          textColor: "white",
+          message: "❌ Upload failed. Please try again.",
+        });
 
-      // When done, add final message
-      setMessages("✅ Files submitted successfully!");
-      setMessages([])
+        setTimeout(() => setInfoMessage(null), 2000);
+        throw new Error("Upload failed");
+      }
+
+      const data= await res.json();
+      
+
+      console.log(data);
+      
+
+      // Close previous connection if exists
+      if (eventSourceRef.current) {
+        eventSourceRef.current.close();
+      }
+
+      // Open new SSE connection
+      const eventSource = new EventSource("http://localhost:8080/auth/api/progress");
+      eventSourceRef.current = eventSource;
+
+      eventSource.onmessage = (e) => {
+              if (e.data === "DONE") {
+          eventSource.close();
+          return;
+        }
+        addMessage(e.data);
+
+        // If backend sends "DONE" → stop SSE
+  
+      };
+
+      eventSource.onerror = (err) => {
+        console.error("SSE error:", err);
+        addMessage("❌ Something went wrong.");
+        eventSource.close();
+      };
     } catch (error) {
-      console.error(error);
-      addMessage("❌ Something went wrong. Please try again.");
+    
+      console.log(error);
+      setInfoMessage({
+        bgColor: "red",
+        textColor: "white",
+        message: "❌ Upload failed. Please check your connection.",
+      });
+      setTimeout(() => setInfoMessage(null), 2000);
     } finally {
       dispatch(setShowSpinner(false));
     }
   };
 
+  // Cleanup object URLs + SSE on unmount
+  useEffect(() => {
+    return () => {
+      Object.values(files).forEach((file) => {
+        if (file) URL.revokeObjectURL(file);
+      });
+      if (eventSourceRef.current) {
+        eventSourceRef.current.close();
+      }
+    };
+  }, [files]);
+
   return (
     <>
-      <div className={styles.fileuploadcontainer}>
-      <form className={styles.fileUploadForm} onSubmit={handleSubmit}>
-        <h2 style={{ textAlign: "center", color: "#fff", marginBottom: "1rem" }}>
-          Upload Required Documents
-        </h2>
-        <div style={{"display":"flex"}}>
-        {renderUploadBox("Upload Domicile", "domicile", files.domicile)}
-        {renderUploadBox("Upload Matric Certificate", "matric", files.matric)}
-        {renderUploadBox(
-          "Upload Intermediate Certificate",
-          "intermediate",
-          files.intermediate
-        )}
-        </div>
-        <div>
-        <button type="submit" className={styles.button}>
-          Submit
-        </button>
-        </div>
-      </form>
+      <Container>
+        <div className={styles.fileuploadcontainer}>
+          <form className={styles.fileUploadForm} onSubmit={handleSubmit}>
+            <h2>Upload Required Documents</h2>
+            <div className={styles.uploadBoxContainer}>
+              {renderUploadBox("Upload Domicile", "domicile", files.domicile)}
+              {renderUploadBox("Upload Matric Certificate", "matric", files.matric)}
+              {renderUploadBox(
+                "Upload Intermediate Certificate",
+                "intermediate",
+                files.intermediate
+              )}
+            </div>
+            <div>
+              {files.domicile && files.intermediate && files.matric && (
+                <button type="submit" className={styles.button}>
+                  Submit
+                </button>
+              )}
+            </div>
+          </form>
 
-  </div>
-    
+          <p>
+            Please make sure your documents are clear, valid, and match the
+            required format. Uploads should not exceed 5MB each. Accepted formats
+            are JPEG and PNG only. Once submitted, you will see live progress
+            updates from the server as your files are uploaded and analyzed.
+          </p>
+        </div>
+      </Container>
+
       {messages.length > 0 && (
         <div
           className="messagesBox"
           style={{
             position: "absolute",
-            top: "30%",
+            top: "5%",
             left: "50%",
-            // transform: "translate(-50%, -50%)",
             background: "rgba(0,0,0,0.7)",
             padding: "1rem 1.5rem",
             borderRadius: "10px",
             color: "#fff",
             maxWidth: "400px",
+            transform: "translateX(-50%)",
           }}
         >
           {messages.map((msg, i) => (
@@ -180,7 +245,9 @@ const MultiFileUpload = () => {
           ))}
         </div>
       )}
-      </>
+
+      {infoMessage && <InfoUtility info={infoMessage} />}
+    </>
   );
 };
 

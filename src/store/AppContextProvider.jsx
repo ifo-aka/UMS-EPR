@@ -2,7 +2,7 @@
 import { useLayoutEffect, useEffect, useRef } from "react";
 import { AppContext } from "./AppContext";
 import { useSelector, useDispatch } from "react-redux";
-
+import { authenticationCheck } from "./DbQuery";
 import {
   setSideBarActiveLink ,
   setIsMobileDimention,
@@ -25,6 +25,14 @@ const AppContextProvider = ({ children }) => {
     //will perform tasks
     });
   }, [dispatch]);
+
+  useEffect(()=>{
+    const doCheck= async ()=>{
+     const res= await authenticationCheck();
+     console.log(res)
+    }
+    doCheck();
+  },[]);
 
   useLayoutEffect(() => {
     const width = window.innerWidth;
