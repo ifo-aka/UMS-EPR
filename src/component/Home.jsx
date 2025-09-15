@@ -11,7 +11,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const role = useSelector((s) => s.auth.role);
   const isAuthenticated = useSelector((a)=>a.auth.isAuthenticated)
-  console.log(role)
+
 
   
 

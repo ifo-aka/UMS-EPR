@@ -18,7 +18,7 @@ const Header = () => {
   const {isAuthenticated} = useSelector((s)=>s.auth)
   const {isMobileDimention} = useSelector((s)=>s.ui)
 
-  console.log(isMobileDimention)
+
 
   return (
     <div className={styles.header}>

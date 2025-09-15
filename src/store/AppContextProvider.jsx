@@ -11,6 +11,7 @@ import {
 import {
   
   restoreAuthFromLocalStorage,
+  checkSessionValidation,
  
   
 } from "./slices/authSlice"
@@ -27,11 +28,9 @@ const AppContextProvider = ({ children }) => {
   }, [dispatch]);
 
   useEffect(()=>{
-    const doCheck= async ()=>{
-     const res= await authenticationCheck();
-     console.log(res)
-    }
-    doCheck();
+   dispatch(checkSessionValidation()).then((res)=>{
+    
+   })
   },[]);
 
   useLayoutEffect(() => {
@@ -47,6 +46,7 @@ const AppContextProvider = ({ children }) => {
   // resize handler
   useEffect(() => {
     const handleResize = () => {
+      console.log(prevWidth.current);
       const currentWidth = window.innerWidth;
       const wasMobile = prevWidth.current < 950;
       const isNowMobile = currentWidth < 950;
@@ -54,12 +54,19 @@ const AppContextProvider = ({ children }) => {
         if (isNowMobile) dispatch(setIsMobileDimention(true));
         else dispatch(setIsDesktopDimention(true));
       }
+      console.log(wasMobile +" and "+ isNowMobile);
+      
       prevWidth.current = currentWidth;
+    
     };
 
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    return () =>{
+       window.removeEventListener("resize", handleResize);
+      
+      }
   }, [dispatch]);
+  console.log(dispatch)
 
   return (
     <AppContext.Provider

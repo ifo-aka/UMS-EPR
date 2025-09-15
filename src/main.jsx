@@ -11,6 +11,7 @@ import store from "./store"
 
 // Context
 import AppContextProvider from './store/AppContextProvider.jsx';
+import PersonalProfile from './component/PersonalProfile.jsx';
 
 // Layout
 import App from './App.jsx';
@@ -60,12 +61,21 @@ function AppRoutes() {
         },
         { path: 'studentDetail', element: <StudentDetailPage /> },
         { path: 'fileUpload', element: <FileUploadPage /> },
+        {path: "personalProfile",element : <PersonalProfile />},
+        {path: "profile", element :(
+          <ProtectedRoutes isAuthenticated={isAuthenticated}>
+
+           <PersonalProfile />
+           </ProtectedRoutes>
+        )
+          },
       ],
     },
 
     // Standalone routes (no App layout)
     
     { path: '/about', element: <About /> },
+    
     { path: '*', element: <NotFound /> },
   ]);
 

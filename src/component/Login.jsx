@@ -10,12 +10,6 @@ import { loginThunk } from "../store/slices/authSlice";
 import { setShowSpinner } from "../store/slices/authSlice";
 import Container from "./Container";
 
-
-
-
-
-
-
 const Login = () => {
     const isAuthenticated = useSelector((s)=>s.auth.isAuthenticated)
     const [error,setError] = useState("");
@@ -32,7 +26,7 @@ const Login = () => {
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-       console.log(event)
+
        
       dispatch( setShowSpinner(true));
         dispatch( loginThunk({email, password}))
@@ -57,7 +51,7 @@ const Login = () => {
     };
 
     useEffect(()=>{
-        console.log(isAuthenticated)
+      
                if (isAuthenticated ) {
                 console.log("navigating")
           

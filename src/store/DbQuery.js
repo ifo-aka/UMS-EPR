@@ -56,7 +56,7 @@ export const signupStudent = async (signupStudentObject) =>
   });
 
 export const authenticationCheck = async () =>
-  apiFetch("/auth/check", {
+  apiFetch("/auth/me", {
     authRequired: true,
     options: { method: "GET" ,  headers: { "Content-Type": "application/json" }, },
   });

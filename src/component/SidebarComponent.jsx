@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 const SidebarComponent = ({ role = "guest" }) => {
 const dispatch = useDispatch()
   const {sideBarActiveLink,isMobileDimention} = useSelector((s)=>s.ui)
-console.log(isMobileDimention)
+
   const [isOpen, setIsOpen] = useState(false);
   const overlayRef = useRef();
   const sidebarRef = useRef();
@@ -26,8 +26,6 @@ const  handleOverLayClick=(event)=>{
     }
   }
   }
-  console.log(role)
-  console.log(isOpen)
 
 
   const { pathname } = useLocation();
@@ -63,7 +61,7 @@ const  handleOverLayClick=(event)=>{
     ],
   };
 role= role.toLocaleLowerCase();
-console.log(role)
+
 
   const linksToShow = roleLinks[role] || roleLinks.guest;
 

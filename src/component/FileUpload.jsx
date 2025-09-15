@@ -5,7 +5,6 @@ import { setShowSpinner } from "../store/slices/authSlice";
 import Container from "./Container";
 import InfoUtility from "../store/InfoUtility";
 
-
 const MultiFileUpload = () => {
   const dispatch = useDispatch();
   const eventSourceRef = useRef(null);
@@ -19,6 +18,7 @@ const MultiFileUpload = () => {
   const [messages, setMessages] = useState([]);
   const [dragging, setDragging] = useState(null);
   const [infoMessage, setInfoMessage] = useState(null);
+  const [parsedData, setParsedData] = useState(null); // final DocsDTA JSON
 
   const handleFileSelect = (file, type) => {
     if (file) {
@@ -115,58 +115,50 @@ const MultiFileUpload = () => {
 
     dispatch(setShowSpinner(true));
     setMessages([]);
+    setParsedData(null);
 
     try {
-      const res = await fetch("http://localhost:8080/auth/api/submitdocs", {
+      // SSE via fetch
+      const response = await fetch("http://localhost:8080/auth/api/submitdocs", {
         method: "POST",
         body: fd,
       });
 
-      if (!res.ok) {
-        setInfoMessage({
-          bgColor: "red",
-          textColor: "white",
-          message: "❌ Upload failed. Please try again.",
+      if (!response.ok) throw new Error("Upload failed");
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value, { stream: true });
+        chunk.split("\n\n").forEach((line) => {
+          if (line.startsWith("event:")) {
+            const [_, eventName] = line.split(":");
+            // next line will be data
+          }
+          if (line.startsWith("data:")) {
+            const dataStr = line.replace("data:", "").trim();
+
+            if (line.includes("DocsDTA") || dataStr.startsWith("{")) {
+              try {
+                const json = JSON.parse(dataStr);
+                setParsedData(json); // Autofill forms here!
+              } catch (e) {
+                console.error("Invalid JSON:", e);
+              }
+            } else if (dataStr === "DONE") {
+              addMessage("🎉 Completed!");
+            } else {
+              addMessage(dataStr);
+            }
+          }
         });
-
-        setTimeout(() => setInfoMessage(null), 2000);
-        throw new Error("Upload failed");
       }
-
-      const data= await res.json();
-      
-
-      console.log(data);
-      
-
-      // Close previous connection if exists
-      if (eventSourceRef.current) {
-        eventSourceRef.current.close();
-      }
-
-      // Open new SSE connection
-      const eventSource = new EventSource("http://localhost:8080/auth/api/progress");
-      eventSourceRef.current = eventSource;
-
-      eventSource.onmessage = (e) => {
-              if (e.data === "DONE") {
-          eventSource.close();
-          return;
-        }
-        addMessage(e.data);
-
-        // If backend sends "DONE" → stop SSE
-  
-      };
-
-      eventSource.onerror = (err) => {
-        console.error("SSE error:", err);
-        addMessage("❌ Something went wrong.");
-        eventSource.close();
-      };
-    } catch (error) {
-    
-      console.log(error);
+    } catch (err) {
+      console.error("Upload error:", err);
       setInfoMessage({
         bgColor: "red",
         textColor: "white",
@@ -178,15 +170,12 @@ const MultiFileUpload = () => {
     }
   };
 
-  // Cleanup object URLs + SSE on unmount
+  // Cleanup object URLs
   useEffect(() => {
     return () => {
       Object.values(files).forEach((file) => {
         if (file) URL.revokeObjectURL(file);
       });
-      if (eventSourceRef.current) {
-        eventSourceRef.current.close();
-      }
     };
   }, [files]);
 
@@ -244,6 +233,12 @@ const MultiFileUpload = () => {
             </p>
           ))}
         </div>
+      )}
+
+      {parsedData && (
+        <pre style={{ background: "#222", color: "#0f0", padding: "1rem" }}>
+          {JSON.stringify(parsedData, null, 2)}
+        </pre>
       )}
 
       {infoMessage && <InfoUtility info={infoMessage} />}

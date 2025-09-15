@@ -15,6 +15,9 @@
   font-family: "Inter", sans-serif;
 overflow: auto;
 }
+.container::-webkit-scrollbar{
+  opacity: 0;
+}
 .spinner{
   color: var(--text-primary);
 }

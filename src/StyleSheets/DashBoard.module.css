@@ -142,12 +142,12 @@
 
 .totalStudent {
   background: var(--gradient-accent);
-  color: var(--text-primary);
+  color: var(--text-on-accent);
 }
 
 .totalPages {
   background: var(--gradient-accent-reverse); /* custom dark gradient */
-  color: var(--text-primary);
+  color: var(--text-on-accent);
 }
 
 .totalDepartments {
@@ -182,7 +182,9 @@
   font-weight: 600;
   color: var(--accent-alt);
 }
-
+.studentToshowHeading{
+  color: var(--text-primary);
+}
 /* ========== TABLE ========== */
 .tableContainer {
   width: 100%;
@@ -218,7 +220,7 @@
 
 .studentsTable th {
   background: var(--gradient-accent-vivid);
-  color: var(--text-primary);
+  color: var(--text-on-accent);
   font-weight: bold;
   font-size: calc(1vw + .3rem);
   padding: 1rem;

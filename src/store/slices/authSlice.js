@@ -1,14 +1,15 @@
 // src/store/slices/authSlice.js
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
  // adjust path if needed
-import { fetchStudents as dbFetchStudents ,  login as dbLogin,signupStudent as dbSignUpStudent} from "../DbQuery";
+import { fetchStudents as dbFetchStudents ,  login as dbLogin,signupStudent as dbSignUpStudent, authenticationCheck as dbAuthenticationheck, authenticationCheck } from "../DbQuery";
 import { fetchStudentsThunk } from "./studentSlice";
+import { AwardIcon } from "lucide-react";
 export const signupThunk = createAsyncThunk(
   "auth/signup",
   async (userData, { rejectWithValue }) => {
     try {
       const response = await dbSignUpStudent(userData);
-      console.log(response)
+  
 
       // ✅ Explicitly check backend success flag
       if (!response.success) {
@@ -29,7 +30,7 @@ export const loginThunk = createAsyncThunk(
       if (data?.data?.token) {
         // after login, fetch first students page
         // dispatch(fetchStudentsThunk({ page: 0, size: 10, sortBy: "id" }));
-        console.log(data.data);
+
         localStorage.setItem("token", data.data.token);
         localStorage.setItem("role", data.data.role || "Guest");
         // dispatch(authSlice.actions.setRole(role))
@@ -61,6 +62,18 @@ export const restoreAuthFromLocalStorage = createAsyncThunk(
     return { token: null, role: null };
   }
 );
+export const checkSessionValidation= createAsyncThunk(
+  "auth/me",
+  async(_,{dispatch,getState})=>{
+    const res = await dbAuthenticationheck();
+    if(res.error){
+      rejectWithValue(res.error)
+      return;
+    }
+  return res;
+
+  }
+)
 
 // We reference fetchStudentsThunk, but define it in studentsSlice and import it there.
 // To avoid circular imports we will dispatch fetchStudentsThunk by string or the students thunk
@@ -76,6 +89,12 @@ const authSlice = createSlice({
     authChecked: false,
     showSpinner: false,
     loginError: null,
+    userObject : {
+     id : null,
+     username : "",
+     email: "",
+     role : "",
+    }
   },
   reducers: {
     logout(state) {
@@ -104,7 +123,7 @@ const authSlice = createSlice({
   extraReducers(builder) {
     builder
     .addCase(signupThunk.fulfilled ,(state,action)=>{
-      console.log("payload" + action.payload)
+  
       const {role,token} = action.payload.data;
       localStorage.setItem("token",token);
       localStorage.setItem("role",role.toUpperCase() || "GUEST");
@@ -121,11 +140,11 @@ const authSlice = createSlice({
         state.loginError = null;
       })
       .addCase(loginThunk.fulfilled, (state, action) => {
-        const { token, role } = action.payload.data;
-        console.log(action)
-        console.log(action.payload)
+        const { token, role,id,username,email } = action.payload.data;
+      
         state.token = token;
         state.role = role || "Guest";
+        state.userObject = {id,username,role,email};
         state.isAuthenticated = true;
         state.isAdmin = ((role || "").toUpperCase() === "ADMIN");
         state.authChecked = true;
@@ -133,6 +152,7 @@ const authSlice = createSlice({
         // persist token
         if (token) localStorage.setItem("token", token);
         if (role) localStorage.setItem("role", role);
+        console.log(state.userObject);
       })
       .addCase(loginThunk.rejected, (state, action) => {
         state.isAuthenticated = false;
@@ -153,7 +173,12 @@ const authSlice = createSlice({
         state.isAuthenticated = !!token;
         state.isAdmin = ((role || "").toUpperCase() === "ADMIN");
         state.authChecked = true;
-      });
+      })
+      .addCase(checkSessionValidation.fulfilled,(state,action)=>{
+        console.log(action);
+        
+       state.userObject = action.payload.data;
+      })
   },
 });
 
